@@ -1,45 +1,13 @@
-import React from 'react';
+import React, { Component } from 'react';
 import InputCrypto from './InputCrypto';
-import axios from 'axios';
-const url = 'https://api.coinmarketcap.com/v1/ticker/'
 
-// https://api.coinmarketcap.com/v1/ticker/?convert=CAD&limit=10
-class Favorites extends React.Component {
+class Favorites extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      userChart: []
-    };
-  }
-
-  getChart = (url) => {
-    let promise = axios.get(url)
-    promise.then((response) => {
-      this.setState({
-        userChart: response.data
-      })
-      console.log(this.state.userChart);
-    })
-  }
-
-  componentDidMount(){
-    console.log('updated (3 min intervals)');
-    this.getChart(url);
-
-    setInterval( () => {
-      this.getChart(url);
-    },30000)
-
-    // this.getChart(url);
-  }
-
-  searchHandler = (e) => {
-      e.preventDefault();
-      this.getChart(`${url}` + this.searchInput.value)
   }
 
   render() {
-    let userChartList = this.state.userChart.map((coin, i) => {
+    let userChartList = this.props.userChart.map((coin, i) => {
       let caret = coin.percent_change_1h > 0 ?
         <i className="fa fa-caret-up green" aria-hidden="true"></i> :
         <i className="fa fa-caret-down red" aria-hidden="true"></i> ;
@@ -57,7 +25,9 @@ class Favorites extends React.Component {
 
     return (
       <div>
-        <InputCrypto searchHandler={this.searchHandler}/>
+        <InputCrypto 
+          addFavorite={this.props.addFavorite}
+        />
         <h1>Favorites</h1>
         <hr />
         <div className="col-sm-offset-2 col-sm-8">

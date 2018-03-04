@@ -1,40 +1,14 @@
-import React from 'react';
-import axios from 'axios';
+import React, { Component } from 'react';
 import { CSSTransitionGroup } from 'react-transition-group'
-const url = 'https://api.coinmarketcap.com/v1/ticker/?convert=CAD&limit=25'
 
 // https://api.coinmarketcap.com/v1/ticker/?convert=CAD&limit=10
-class Charts extends React.Component {
+class Charts extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      topChart: []
-    };
-  }
-
-  getChart = (url) => {
-    let promise = axios.get(url)
-    promise.then((response) => {
-      this.setState({
-        topChart: response.data
-      })
-      console.log(this.state.topChart);
-    })
-  }
-
-  componentDidMount(){
-    console.log('updated (5 min intervals)');
-    this.getChart(url);
-
-    setInterval( () => {
-      this.getChart(url);
-    },30000)
-
-    // this.getChart(url);
   }
 
   render() {
-    let topChartList = this.state.topChart.map((coin, i) => {
+    let topChartList = this.props.topChart.map((coin, i) => {
       let caret = coin.percent_change_1h > 0 ?
         <i className="fa fa-caret-up green" aria-hidden="true"></i> :
         <i className="fa fa-caret-down red" aria-hidden="true"></i> ;
@@ -56,7 +30,7 @@ class Charts extends React.Component {
     })
 
     return (
-      <div>
+      <div className="chartTable">
         <p className="pull-right text-muted">Charts auto update every 3 minutes</p>
         <h1>Global 25 Charts</h1>
         <hr />
@@ -72,18 +46,10 @@ class Charts extends React.Component {
               </tr>
             </thead>
             <tbody>
-              {/* <CSSTransitionGroup
-                transitionName="example"
-                transitionEnterTimeout={500}
-                transitionLeaveTimeout={300}> */}
               {topChartList}
-              {/* </CSSTransitionGroup> */}
             </tbody>
           </table>
         </div>
-        {/* <div>
-          <p className="text-center text-muted">*some icons may not be available</p>
-        </div> */}
       </div>
     )
   }

@@ -4,9 +4,9 @@ class Home extends React.Component {
   render() {
     return(
       <div>
-        <h1>Home</h1>
+        <h1>React-Crypto</h1>
         <hr />
-        <p>Welcome to React-Crypto</p>
+        <p>React-Crypto is a live, top charts for cryptocurrency coins. </p>
         <p></p>
       </div>
     )
