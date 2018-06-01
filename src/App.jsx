@@ -28,7 +28,7 @@ class App extends Component {
   }
 
   componentDidMount(){
-    this.getChart(url);    
+    this.getChart(url);
     setInterval( () => {
       this.getChart(url);
     },30000)
@@ -49,20 +49,20 @@ class App extends Component {
         <Navbar />
         <div className="container">
           <Switch>
-            <Route exact path='/' component={Home}/>    
+            <Route exact path='/' component={Home}/>
             <Route path='/charts' render={
-              ()=><Charts 
-                getChart={this.getChart} 
-                topChart={this.state.topChart} 
+              ()=><Charts
+                getChart={this.getChart}
+                topChart={this.state.topChart}
               />
             }/>
             <Route path='/favorites' render={
               ()=><Favorites
-                getChart={this.getChart} 
-                addFavorite={this.addFavorite} 
-                delFavorite={this.delFavorite} 
-                topChart={this.state.topChart} 
-                userChart={this.state.userChart} 
+                getChart={this.getChart}
+                addFavorite={this.addFavorite}
+                delFavorite={this.delFavorite}
+                topChart={this.state.topChart}
+                userChart={this.state.userChart}
               />
             }/>
           </Switch>

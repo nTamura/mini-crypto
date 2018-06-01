@@ -12,13 +12,11 @@ class Charts extends Component {
       let caret = coin.percent_change_1h > 0 ?
         <i className="fa fa-caret-up green" aria-hidden="true"></i> :
         <i className="fa fa-caret-down red" aria-hidden="true"></i> ;
-      let sprite = !coin.symbol ? 
+      let sprite = !coin.symbol ?
       // <i class="fa fa-exclamation-circle" aria-hidden="true"></i>
-      <p>error</p>
-      :
-      <i className={`${coin.symbol} cc`}></i> 
-        ;
-        return (
+      <p>error</p> :
+      <i className={`${coin.symbol} cc`}></i>;
+      return (
         <tr key={i}>
           <td>{caret} {coin.percent_change_1h}</td>
           <td>{sprite} </td>

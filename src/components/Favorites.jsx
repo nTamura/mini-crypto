@@ -25,11 +25,12 @@ class Favorites extends Component {
 
     return (
       <div>
-        <InputCrypto 
+        <InputCrypto
           addFavorite={this.props.addFavorite}
         />
         <h1>Favorites</h1>
         <hr />
+
         <div className="col-sm-offset-2 col-sm-8">
           <table className="table table-striped">
             <thead>
@@ -42,10 +43,12 @@ class Favorites extends Component {
               </tr>
             </thead>
             <tbody>
-              No favorites yet...
               {/* {userChartList} */}
             </tbody>
           </table>
+
+          <p className="text-center">Feature unavailable at this time.</p>
+
         </div>
       </div>
     )
