@@ -27,17 +27,27 @@ class App extends Component {
     })
   }
 
-  componentDidMount(){
+  getFav = (param) => {
+    // let localstorage = axios.get(param)
+    // localstorage.then((response) => {
+    //   this.setState({
+    //     userChart: response.data
+    //   })
+    // })
+  }
+
+  componentDidMount () {
     this.getChart(url);
     setInterval( () => {
       this.getChart(url);
-    },30000)
+    }, 30000)
   }
 
   addFavorite = (e) => {
     e.preventDefault()
     console.log(e)
   }
+
   delFavorite = (e) => {
     e.preventDefault()
     console.log('add')
@@ -51,22 +61,24 @@ class App extends Component {
           <Switch>
             <Route exact path='/' component={Home}/>
             <Route path='/charts'
-              render={() => 
+              render={() =>
                 <Charts
                   getChart={this.getChart}
                   topChart={this.state.topChart}
                 />
               }
             />
-            <Route path='/favorites' render={
-              ()=><Favorites
-                getChart={this.getChart}
-                addFavorite={this.addFavorite}
-                delFavorite={this.delFavorite}
-                topChart={this.state.topChart}
-                userChart={this.state.userChart}
-              />
-            }/>
+            <Route path='/favorites'
+              render={ () =>
+                <Favorites
+                  getChart={this.getChart}
+                  addFavorite={this.addFavorite}
+                  delFavorite={this.delFavorite}
+                  topChart={this.state.topChart}
+                  userChart={this.state.userChart}
+                />
+              }
+            />
           </Switch>
         </div>
       </div>
