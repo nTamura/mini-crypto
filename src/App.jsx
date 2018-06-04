@@ -50,12 +50,14 @@ class App extends Component {
         <div className="container">
           <Switch>
             <Route exact path='/' component={Home}/>
-            <Route path='/charts' render={
-              ()=><Charts
-                getChart={this.getChart}
-                topChart={this.state.topChart}
-              />
-            }/>
+            <Route path='/charts'
+              render={() => 
+                <Charts
+                  getChart={this.getChart}
+                  topChart={this.state.topChart}
+                />
+              }
+            />
             <Route path='/favorites' render={
               ()=><Favorites
                 getChart={this.getChart}

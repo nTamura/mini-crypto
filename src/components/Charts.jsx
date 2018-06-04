@@ -30,24 +30,21 @@ class Charts extends Component {
     return (
       <div className="chartTable">
         <p className="pull-right text-muted">Charts auto update every 3 minutes</p>
-        <h1>Global 25 Charts</h1>
-        <hr />
-        <div className="container">
-          <table className="table table-striped">
-            <thead>
-              <tr>
-                <th className="text-center">24H $</th>
-                <th>Icon</th>
-                <th>Symbol</th>
-                <th>Coin</th>
-                <th className="pull">Price (USD)</th>
-              </tr>
-            </thead>
-            <tbody>
-              {topChartList}
-            </tbody>
-          </table>
-        </div>
+        <h1 className="pull-left">Global 25 Charts</h1>
+        <table className="table table-striped">
+          <thead>
+            <tr>
+              <th className="text-center">24H $</th>
+              <th>Icon</th>
+              <th>Symbol</th>
+              <th>Coin</th>
+              <th className="pull">Price (USD)</th>
+            </tr>
+          </thead>
+          <tbody>
+            {topChartList}
+          </tbody>
+        </table>
       </div>
     )
   }

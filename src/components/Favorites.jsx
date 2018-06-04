@@ -32,7 +32,7 @@ class Favorites extends Component {
         <hr />
 
         <div className="col-sm-offset-2 col-sm-8">
-          <table className="table table-striped">
+          {/* <table className="table table-striped">
             <thead>
               <tr>
                 <th className="text-center">24H $</th>
@@ -43,9 +43,9 @@ class Favorites extends Component {
               </tr>
             </thead>
             <tbody>
-              {/* {userChartList} */}
+              {userChartList}
             </tbody>
-          </table>
+          </table> */}
 
           <p className="text-center">Feature unavailable at this time.</p>
 

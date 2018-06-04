@@ -32,3 +32,17 @@ body {
 .chartTable {
   margin-bottom: 2em;
 }
+
+
+@media only screen and (max-width: 360px) {
+  body {
+    font-size: 1.2em;
+    width: auto;
+  }
+  .container {
+    padding: 0;
+  }
+  .navbar-header {
+    margin: 0;
+  }
+}
