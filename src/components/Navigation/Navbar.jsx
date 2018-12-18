@@ -59,7 +59,7 @@ class Navbar extends Component {
           <Typography
             component={Link}
             to="/"
-            variant="headline"
+            variant="h6"
             className={classes.title}
           >
             Crypto Charts

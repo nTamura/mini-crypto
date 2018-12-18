@@ -4,9 +4,7 @@ const CustomTheme = createMuiTheme({
   typography: {
     useNextVariants: true,
     fontFamily: 'Roboto'
-    // fontColor: 'white',
   },
-
   palette: {
     type: 'dark',
     text: {
