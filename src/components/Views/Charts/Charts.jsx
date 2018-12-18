@@ -24,15 +24,18 @@ const styles = () => ({
     width: '100%',
     overflowX: 'scroll'
   },
-  tableRoot: {
+  paper: {
     width: '100%',
-    overflowX: 'scroll'
+    overflowX: 'scroll',
+    marginBottom: 32
   },
   cellOverflow: {
     maxWidth: 80,
   },
   toolbar: {
-    display: 'flex'
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'space-between'
   },
   currencyDropdown: {
     fontSize: '1rem'
@@ -42,7 +45,9 @@ const styles = () => ({
     alignItems: 'center'
   },
   searchIcon: {
-
+    color: '#FFF',
+    padding: 12,
+    fontSize: '1.4rem'
   },
   icon: {
     paddingRight: 6
@@ -191,7 +196,7 @@ class Charts extends Component {
               </Menu>
             </div>
             <div className={classes.root}>
-              <Paper className={classes.tableRoot}>
+              <Paper className={classes.paper}>
                 <Table className={classes.table}>
                   <TableHead>
                     <TableRow hover>
