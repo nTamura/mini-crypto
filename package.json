@@ -3,11 +3,12 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@material-ui/core": "^3.6.2",
+    "@material-ui/core": "^3.7.0",
     "@material-ui/icons": "^3.0.1",
     "axios": "^0.18.0",
     "create-react-app": "^2.1.1",
     "cryptocoins-icons": "^2.9.0",
+    "local-storage": "^1.4.2",
     "react": "^16.6.3",
     "react-dom": "^16.6.3",
     "react-router-dom": "^4.3.1",

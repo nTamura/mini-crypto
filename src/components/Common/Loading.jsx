@@ -9,10 +9,10 @@ const styles = () => ({
     display: 'flex',
     alignItems: 'center',
     flexDirection: 'column',
+    margin: '50%'
   },
   progress: {
     margin: 16,
-
   }
 })
 

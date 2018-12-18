@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import { CSSTransitionGroup } from 'react-transition-group'
 import { withStyles } from '@material-ui/core/styles'
 import axios from 'axios'
 
@@ -10,18 +9,34 @@ import TableHead from '@material-ui/core/TableHead'
 import TableRow from '@material-ui/core/TableRow'
 import Paper from '@material-ui/core/Paper'
 
-import { IconButton, Menu, MenuItem, CircularProgress } from '@material-ui/core'
-import { AttachMoney, HdrWeak } from '@material-ui/icons'
+import { IconButton, Menu, MenuItem, Typography } from '@material-ui/core'
+import { AttachMoney, Star, StarBorder } from '@material-ui/icons'
 
 import Loading from 'components/Common/Loading'
 import 'cryptocoins-icons/webfont/cryptocoins.css'
 import 'cryptocoins-icons/webfont/cryptocoins-colors.css'
 
-// https://api.coinmarketcap.com/v1/ticker/?convert=CAD&limit=10
 const url = 'https://api.coinmarketcap.com/v1/ticker/?convert=CAD&limit=25'
-const options = ['USD', 'CAD']
+const options = ['usd', 'cad']
 
 const styles = () => ({
+
+  tableRoot: {
+    width: '100%',
+    overflowX: 'scroll'
+  },
+  cellOverflow: {
+    maxWidth: 80,
+  },
+  icon: {
+    paddingRight: 6
+  },
+  up: {
+    color: '#2cac48'
+  },
+  down: {
+    color: '#e72121'
+  }
 })
 
 class Charts extends Component {
@@ -30,9 +45,9 @@ class Charts extends Component {
     this.state = {
       isLoading: true,
       topChart: [],
-      userChart: [],
+      favorites: ['BTC'],
       anchorEl: null,
-      currency: 'USD'
+      currency: 'usd'
     }
   }
 
@@ -55,6 +70,24 @@ class Charts extends Component {
     })
   }
 
+  favorited = item => {
+    const { favorites } = this.state
+    return favorites.includes(item)
+  }
+
+  toggleFavorite = item => {
+    const { favorites } = this.state
+    if (favorites.includes(item)) {
+      this.setState({
+        favorites: favorites.filter(i => i !== item)
+      })
+    } else {
+      this.setState({
+        favorites: favorites.concat(item)
+      })
+    }
+  }
+
   getChart = url => {
     axios.get(url).then(res => {
       console.log(res.data)
@@ -64,19 +97,19 @@ class Charts extends Component {
     })
   }
 
+
   render() {
     const { isLoading, topChart, anchorEl, currency } = this.state
     const { classes } = this.props
 
+    const marketCap = `coin.market_cap_${currency}`
+    const price = `coin.price_${currency}`
+    const volume = `coin.24h_volume_${currency}`
 
     return (
       <>
-        { !isLoading
-          ? <>
-            <Loading />
-
-          </>
-
+        { isLoading
+          ? <Loading />
           : <>
             <div>
               <IconButton
@@ -105,32 +138,82 @@ class Charts extends Component {
                 ))}
               </Menu>
             </div>
+            <div>
+              <Typography variant="caption">
+                Global top 25
+              </Typography>
+            </div>
 
-
-            <Paper className={classes.root}>
+            <Paper className={classes.tableRoot}>
               <Table className={classes.table}>
                 <TableHead>
                   <TableRow hover>
-                    <TableCell>Name</TableCell>
-                    <TableCell numeric>Market Cap</TableCell>
-                    <TableCell numeric>Price</TableCell>
-                    <TableCell numeric>Volume (24h)</TableCell>
-                    <TableCell numeric>Change (24h)</TableCell>
-                    <TableCell numeric>Graph (7d)</TableCell>
+                    <TableCell padding="checkbox" />
+                    <TableCell padding="checkbox">Name</TableCell>
+                    <TableCell padding="none" align="right">
+                      Market Cap
+                    </TableCell>
+                    <TableCell padding="checkbox" align="right">
+                      Price
+                    </TableCell>
+                    <TableCell padding="checkbox" align="right">
+                      Change (24h)
+                    </TableCell>
                   </TableRow>
                 </TableHead>
                 <TableBody>
                   {topChart.map(coin => (
-                    <TableRow key={coin.id}>
-                      <TableCell component="th" scope="row">
-                        <i className={`${coin.symbol} cc`} />
-                        {coin.symbol}
-                      </TableCell>
-                      <TableCell numeric>asd</TableCell>
-                      <TableCell numeric>asd</TableCell>
-                      <TableCell numeric>asd</TableCell>
-                      <TableCell numeric>asd</TableCell>
-                    </TableRow>
+                    <>
+
+                      <TableRow key={coin.id}>
+                        <TableCell padding="checkbox" align="right">
+                          {this.favorited(coin.symbol)
+                            ? <Star onClick={() => {
+                              this.toggleFavorite(coin.symbol)
+                            }}
+                            />
+                            : <StarBorder onClick={() => {
+                              this.toggleFavorite(coin.symbol)
+                            }}
+                            />
+                          }
+                        </TableCell>
+
+                        <TableCell padding="checkbox" component="th" scope="row" className={classes.cellOverflow}>
+                          <Typography variant="body1">
+                            <i className={[classes.icon, `${coin.symbol}`, 'cc'].join(' ')} />
+                            {coin.symbol}
+                          </Typography>
+
+                          <Typography variant="caption" noWrap>
+                            {coin.name}
+                          </Typography>
+
+                        </TableCell>
+                        <TableCell padding="none" align="right">
+                          $
+                          {
+                            new Intl.NumberFormat('en-US').format(eval(marketCap))
+                          }
+                        </TableCell>
+                        <TableCell padding="checkbox" align="right">
+                          $
+                          {
+                            new Intl.NumberFormat('en-US').format(eval(price))
+                          }
+                        </TableCell>
+                        <TableCell
+                          padding="checkbox"
+                          align="right"
+                          className={coin.percent_change_24h > 0
+                            ? `${classes.up}`
+                            : `${classes.down}`}
+                        >
+                          {`${coin.percent_change_24h}%`}
+                        </TableCell>
+
+                      </TableRow>
+                    </>
                   ))}
                 </TableBody>
               </Table>
