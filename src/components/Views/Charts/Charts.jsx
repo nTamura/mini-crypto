@@ -9,8 +9,8 @@ import TableHead from '@material-ui/core/TableHead'
 import TableRow from '@material-ui/core/TableRow'
 import Paper from '@material-ui/core/Paper'
 
-import { IconButton, Menu, MenuItem, Typography } from '@material-ui/core'
-import { AttachMoney, Star, StarBorder } from '@material-ui/icons'
+import { IconButton, Menu, MenuItem, Typography, InputBase } from '@material-ui/core'
+import { ArrowDropDown, Search, Star, StarBorder } from '@material-ui/icons'
 
 import Loading from 'components/Common/Loading'
 import 'cryptocoins-icons/webfont/cryptocoins.css'
@@ -20,7 +20,10 @@ const url = 'https://api.coinmarketcap.com/v1/ticker/?convert=CAD&limit=25'
 const options = ['usd', 'cad']
 
 const styles = () => ({
-
+  root: {
+    width: '100%',
+    overflowX: 'scroll'
+  },
   tableRoot: {
     width: '100%',
     overflowX: 'scroll'
@@ -28,8 +31,24 @@ const styles = () => ({
   cellOverflow: {
     maxWidth: 80,
   },
+  toolbar: {
+    display: 'flex'
+  },
+  currencyDropdown: {
+    fontSize: '1rem'
+  },
+  searchBar: {
+    display: 'flex',
+    alignItems: 'center'
+  },
+  searchIcon: {
+
+  },
   icon: {
     paddingRight: 6
+  },
+  star: {
+    color: '#f1e325'
   },
   up: {
     color: '#2cac48'
@@ -45,7 +64,7 @@ class Charts extends Component {
     this.state = {
       isLoading: true,
       topChart: [],
-      favorites: ['BTC'],
+      favorites: [],
       anchorEl: null,
       currency: 'usd'
     }
@@ -53,6 +72,7 @@ class Charts extends Component {
 
   componentDidMount() {
     this.getChart(url)
+    this.getFavorites('favorites')
     setInterval(() => { this.getChart(url) }, 30000)
   }
 
@@ -70,7 +90,7 @@ class Charts extends Component {
     })
   }
 
-  favorited = item => {
+  favoritedItem = item => {
     const { favorites } = this.state
     return favorites.includes(item)
   }
@@ -78,18 +98,35 @@ class Charts extends Component {
   toggleFavorite = item => {
     const { favorites } = this.state
     if (favorites.includes(item)) {
+      const value = favorites.filter(i => i !== item)
       this.setState({
-        favorites: favorites.filter(i => i !== item)
+        favorites: value
+      }, () => {
+        localStorage.setItem('favorites', JSON.stringify([...value]))
       })
     } else {
+      const value = favorites.concat(item)
       this.setState({
-        favorites: favorites.concat(item)
+        favorites: value
+      }, () => {
+        localStorage.setItem('favorites', JSON.stringify([...value]))
       })
     }
   }
 
-  getChart = url => {
-    axios.get(url).then(res => {
+  getFavorites = key => {
+    if (localStorage.hasOwnProperty(key)) {
+      try {
+        this.setState({ [key]: JSON.parse(localStorage.getItem(key)) })
+      } catch (e) {
+        console.log(e)
+        this.setState({ [key]: localStorage.getItem(key) })
+      }
+    }
+  }
+
+  getChart = api => {
+    axios.get(api).then(res => {
       console.log(res.data)
       this.setState({ topChart: res.data }, () => {
         this.setState({ isLoading: false })
@@ -104,21 +141,36 @@ class Charts extends Component {
 
     const marketCap = `coin.market_cap_${currency}`
     const price = `coin.price_${currency}`
-    const volume = `coin.24h_volume_${currency}`
 
     return (
       <>
         { isLoading
           ? <Loading />
           : <>
-            <div>
+            <div className={classes.toolbar}>
+
+              <div className={classes.searchBar}>
+                <div className={classes.searchIcon}>
+                  <Search />
+                </div>
+                <InputBase
+                  placeholder="Search…"
+                  classes={{
+                    root: classes.inputRoot,
+                    input: classes.inputInput,
+                  }}
+                />
+              </div>
+
               <IconButton
                 aria-label="More"
                 aria-owns={anchorEl ? 'long-menu' : null}
                 aria-haspopup="true"
                 onClick={this.handleClick}
+                className={classes.currencyDropdown}
               >
-                <AttachMoney />
+                {currency.toUpperCase()}
+                <ArrowDropDown />
               </IconButton>
               <Menu
                 id="long-menu"
@@ -133,44 +185,39 @@ class Charts extends Component {
                     value={option}
                     onClick={this.selectCurrency}
                   >
-                    {option}
+                    {option.toUpperCase()}
                   </MenuItem>
                 ))}
               </Menu>
             </div>
-            <div>
-              <Typography variant="caption">
-                Global top 25
-              </Typography>
-            </div>
-
-            <Paper className={classes.tableRoot}>
-              <Table className={classes.table}>
-                <TableHead>
-                  <TableRow hover>
-                    <TableCell padding="checkbox" />
-                    <TableCell padding="checkbox">Name</TableCell>
-                    <TableCell padding="none" align="right">
-                      Market Cap
-                    </TableCell>
-                    <TableCell padding="checkbox" align="right">
-                      Price
-                    </TableCell>
-                    <TableCell padding="checkbox" align="right">
-                      Change (24h)
-                    </TableCell>
-                  </TableRow>
-                </TableHead>
-                <TableBody>
-                  {topChart.map(coin => (
-                    <>
-
+            <div className={classes.root}>
+              <Paper className={classes.tableRoot}>
+                <Table className={classes.table}>
+                  <TableHead>
+                    <TableRow hover>
+                      <TableCell padding="checkbox" />
+                      <TableCell padding="checkbox">Name</TableCell>
+                      <TableCell padding="none" align="right">
+                        Market Cap
+                      </TableCell>
+                      <TableCell padding="checkbox" align="right">
+                        Price
+                      </TableCell>
+                      <TableCell padding="checkbox" align="right">
+                        Change (24h)
+                      </TableCell>
+                    </TableRow>
+                  </TableHead>
+                  <TableBody>
+                    {topChart.map(coin => (
                       <TableRow key={coin.id}>
                         <TableCell padding="checkbox" align="right">
-                          {this.favorited(coin.symbol)
-                            ? <Star onClick={() => {
-                              this.toggleFavorite(coin.symbol)
-                            }}
+                          {this.favoritedItem(coin.symbol)
+                            ? <Star
+                              className={classes.star}
+                              onClick={() => {
+                                this.toggleFavorite(coin.symbol)
+                              }}
                             />
                             : <StarBorder onClick={() => {
                               this.toggleFavorite(coin.symbol)
@@ -213,11 +260,11 @@ class Charts extends Component {
                         </TableCell>
 
                       </TableRow>
-                    </>
-                  ))}
-                </TableBody>
-              </Table>
-            </Paper>
+                    ))}
+                  </TableBody>
+                </Table>
+              </Paper>
+            </div>
           </> }
       </>
     )

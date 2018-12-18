@@ -1,4 +1,6 @@
 # React-Crypto-Chart
+React-Crypto-Chart is a lightweight mobile crypto chart. 
+
 Pulls API data from [CoinMarketCap](https://coinmarketcap.com/) and displays the top 25 Cryptocurrencies. Charts auto refresh every 3 minutes, with up or down tickers on the 24 hour volume.
 
 Alternatively, search and mark coins as favorites to view them in a separate tab.
