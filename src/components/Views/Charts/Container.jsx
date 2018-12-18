@@ -1,9 +1,9 @@
-
 import React from 'react'
+import Charts from 'components/Views/Charts/Charts'
 
 const Container = ({}) => (
   <div>
-    Container
+    <Charts />
   </div>
 )
 

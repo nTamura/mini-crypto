@@ -1,10 +1,8 @@
-
 import React from 'react'
+import About from 'components/Views/About/Body'
 
 const Container = ({}) => (
-  <div>
-    Container
-  </div>
+  <About />
 )
 
 export default Container
