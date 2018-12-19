@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { Route, Switch } from 'react-router-dom'
+import { withStyles } from '@material-ui/core/styles'
 
 import Navbar from 'components/Navigation/Navbar'
 import Header from 'components/Common/Header'
@@ -8,20 +9,31 @@ import About from 'components/Views/About'
 import Charts from 'components/Views/Charts'
 import Favorites from 'components/Views/Favorites'
 
+const styles = () => ({
+  root: {
+    backgroundColor: '#323232',
+    paddingBottom: 32
+  }
+})
 
 class App extends Component {
-  constructor() {
-    super()
+  constructor(props) {
+    super(props)
     this.state = {
     }
   }
 
+  componentDidMount() {
+    console.log(this.props)
+  }
+
   render() {
+    const { classes } = this.props
     return (
       <>
         <Navbar />
         <Header />
-        <div className="container">
+        <div className={['container', classes.root].join(' ')}>
           <Switch>
             <Route exact path="/" component={Main} />
             <Route exact path="/charts" component={Charts} />
@@ -34,4 +46,4 @@ class App extends Component {
   }
 }
 
-export default App
+export default withStyles(styles)(App)

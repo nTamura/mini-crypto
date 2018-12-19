@@ -4,6 +4,7 @@ import { SwipeableDrawer, Typography, IconButton, Divider } from '@material-ui/c
 import { withStyles } from '@material-ui/core/styles'
 import { Menu as MenuIcon, Star, TrendingUp } from '@material-ui/icons'
 import GoBack from 'components/Common/GoBack'
+import { withRouter } from 'react-router-dom'
 
 const styles = () => ({
   root: {
@@ -13,6 +14,11 @@ const styles = () => ({
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'space-between'
+  },
+  titleContainer: {
+    display: 'flex',
+    flexDirection: 'column',
+    textAlign: 'center'
   },
   title: {
     paddingLeft: 12,
@@ -47,23 +53,45 @@ class Navbar extends Component {
     this.setState({ drawer: open })
   }
 
-  // TODO: make seperate component for title, match url path to change navbar title
+  matchPath = path => {
+    switch (path) {
+      case '/':
+        return 'Crypto Charts'
+      case '/charts':
+        return 'Global Charts'
+      case '/favorites':
+        return 'Personal Charts'
+      default:
+        return 'Crypto Charts'
+    }
+  }
 
   render() {
-    const { classes } = this.props
+    const { classes, location } = this.props
     const { drawer } = this.state
     return (
       <div className={classes.root}>
         <div className={classes.menuBar}>
           <GoBack />
-          <Typography
-            component={Link}
-            to="/"
-            variant="h6"
-            className={classes.title}
-          >
-            Crypto Charts
-          </Typography>
+          <div className={classes.titleContainer}>
+
+            <Typography
+              component={Link}
+              to="/"
+              variant="h6"
+              className={classes.title}
+            >
+              {this.matchPath(location.pathname)}
+            </Typography>
+            <Typography
+              variant="caption"
+            >
+              {/*
+                once you select a coin, show coin name here
+              */}
+            </Typography>
+          </div>
+
           <IconButton
             // aria-haspopup="true"
             // aria-owns={anchorEl ? 'hamburgerMenu' : null}
@@ -118,5 +146,4 @@ class Navbar extends Component {
     )
   }
 }
-
-export default withStyles(styles)(Navbar)
+export default withRouter(withStyles(styles)(Navbar))
