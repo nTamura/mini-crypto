@@ -39,7 +39,12 @@ const ChartBody = ({
           <TableHead>
             <TableRow hover>
               <TableCell padding="checkbox" />
-              <TableCell padding="checkbox">Name</TableCell>
+              <TableCell padding="none" align="center">
+                Rank
+              </TableCell>
+              <TableCell padding="checkbox">
+                Name
+              </TableCell>
               <TableCell padding="none" align="right">
                 Market Cap
               </TableCell>
@@ -48,6 +53,9 @@ const ChartBody = ({
               </TableCell>
               <TableCell padding="checkbox" align="right">
                 Change (24h)
+              </TableCell>
+              <TableCell padding="checkbox" align="right">
+                Change (7d)
               </TableCell>
             </TableRow>
           </TableHead>
@@ -62,13 +70,16 @@ const ChartBody = ({
                         toggleFavorite(coin.symbol)
                       }}
                     />
-                    : <StarBorder onClick={() => {
-                      toggleFavorite(coin.symbol)
-                    }}
+                    : <StarBorder
+                      onClick={() => {
+                        toggleFavorite(coin.symbol)
+                      }}
                     />
                   }
                 </TableCell>
-
+                <TableCell padding="none" align="center">
+                  {coin.rank}
+                </TableCell>
                 <TableCell padding="checkbox" component="th" scope="row" className={classes.cellOverflow}>
                   <Typography variant="body1">
                     <i className={[classes.icon, `${coin.symbol}`, 'cc'].join(' ')} />
@@ -94,6 +105,15 @@ const ChartBody = ({
                     : `${classes.down}`}
                 >
                   {`${coin.percent_change_24h}%`}
+                </TableCell>
+                <TableCell
+                  padding="checkbox"
+                  align="right"
+                  className={coin.percent_change_7d > 0
+                    ? `${classes.up}`
+                    : `${classes.down}`}
+                >
+                  {`${coin.percent_change_7d}%`}
                 </TableCell>
 
               </TableRow>

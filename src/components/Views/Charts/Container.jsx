@@ -2,28 +2,31 @@ import React, { Component } from 'react'
 import ChartBody from 'components/Views/Charts/ChartBody'
 import Toolbar from 'components/Views/Charts/Toolbar'
 import axios from 'axios'
-
 import Loading from 'components/Common/Loading'
 
-const url = 'https://api.coinmarketcap.com/v1/ticker/?convert=CAD&limit=25'
-
 const options = ['usd', 'cad']
+const url = 'https://api.coinmarketcap.com/v1/ticker/?convert=CAD&limit=25'
 
 class Container extends Component {
   constructor(props) {
     super(props)
+
+    const storageData = JSON.parse(
+      localStorage.getItem('favorites')
+    )
+
     this.state = {
       isLoading: true,
       topChart: [],
-      favorites: [],
+      favorites: storageData || [],
       anchorEl: null,
       currency: 'usd'
     }
   }
 
   componentDidMount() {
+    // this.getFavorites('favorites')
     this.getChart(url)
-    this.getFavorites('favorites')
     setInterval(() => { this.getChart(url) }, 30000)
   }
 
@@ -40,7 +43,6 @@ class Container extends Component {
       this.handleClose()
     })
   }
-
 
   favoritedItem = item => {
     const { favorites } = this.state
@@ -66,17 +68,6 @@ class Container extends Component {
     }
   }
 
-  getFavorites = key => {
-    if (localStorage.hasOwnProperty(key)) {
-      try {
-        this.setState({ [key]: JSON.parse(localStorage.getItem(key)) })
-      } catch (e) {
-        console.log(e)
-        this.setState({ [key]: localStorage.getItem(key) })
-      }
-    }
-  }
-
   getChart = api => {
     axios.get(api).then(res => {
       console.log(res.data)
@@ -87,7 +78,9 @@ class Container extends Component {
   }
 
   render() {
-    const { isLoading, topChart, favorites, anchorEl, currency } = this.state
+    const {
+      isLoading, topChart, anchorEl, currency
+    } = this.state
 
     return (
       <div>
@@ -104,12 +97,11 @@ class Container extends Component {
           : <ChartBody
             topChart={topChart}
             currency={currency}
-            favoritedItem={item => { this.favoritedItem(item) }}
-            toggleFavorite={item => { this.toggleFavorite(item) }}
+            favoritedItem={this.favoritedItem}
+            toggleFavorite={this.toggleFavorite}
           />
         }
       </div>
-
     )
   }
 }

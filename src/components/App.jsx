@@ -32,7 +32,7 @@ class App extends Component {
     return (
       <>
         <Navbar />
-        <Header />
+        {/* <Header /> */}
         <div className={['container', classes.root].join(' ')}>
           <Switch>
             <Route exact path="/" component={Main} />
