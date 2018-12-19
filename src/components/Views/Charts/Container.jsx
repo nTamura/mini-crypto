@@ -42,12 +42,12 @@ class Container extends Component {
   }
 
 
-  favoritedItem = item => e => {
+  favoritedItem = item => {
     const { favorites } = this.state
     return favorites.includes(item)
   }
 
-  toggleFavorite = item => e => {
+  toggleFavorite = item => {
     const { favorites } = this.state
     if (favorites.includes(item)) {
       const value = favorites.filter(i => i !== item)

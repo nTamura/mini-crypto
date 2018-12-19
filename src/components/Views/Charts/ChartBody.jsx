@@ -1,20 +1,10 @@
-import React, { Component } from 'react'
+import React from 'react'
 import { withStyles } from '@material-ui/core/styles'
-
-import Table from '@material-ui/core/Table'
-import TableBody from '@material-ui/core/TableBody'
-import TableCell from '@material-ui/core/TableCell'
-import TableHead from '@material-ui/core/TableHead'
-import TableRow from '@material-ui/core/TableRow'
-import Paper from '@material-ui/core/Paper'
-
-import { Typography } from '@material-ui/core'
-
+import { Typography, Table, TableBody, TableCell, TableHead, TableRow, Paper } from '@material-ui/core'
 import { Star, StarBorder } from '@material-ui/icons'
-
+import toCurrency from 'Helpers/toCurrency'
 import 'cryptocoins-icons/webfont/cryptocoins.css'
 import 'cryptocoins-icons/webfont/cryptocoins-colors.css'
-
 
 const styles = () => ({
   root: {
@@ -28,19 +18,12 @@ const styles = () => ({
   cellOverflow: {
     maxWidth: 80,
   },
-
   icon: {
     paddingRight: 6
   },
-  star: {
-    color: '#f1e325'
-  },
-  up: {
-    color: '#2cac48'
-  },
-  down: {
-    color: '#e72121'
-  }
+  star: { color: '#f1e325' },
+  up: { color: '#2cac48' },
+  down: { color: '#e72121' }
 })
 
 const ChartBody = ({
@@ -48,9 +31,8 @@ const ChartBody = ({
 }) => {
   const marketCap = `coin.market_cap_${currency}`
   const price = `coin.price_${currency}`
+
   return (
-
-
     <div className={classes.root}>
       <Paper className={classes.paper}>
         <Table className={classes.table}>
@@ -99,16 +81,10 @@ const ChartBody = ({
 
                 </TableCell>
                 <TableCell padding="none" align="right">
-                      $
-                  {
-                        new Intl.NumberFormat('en-US').format(eval(marketCap))
-                      }
+                  {toCurrency(eval(marketCap))}
                 </TableCell>
                 <TableCell padding="checkbox" align="right">
-                      $
-                  {
-                        new Intl.NumberFormat('en-US').format(eval(price))
-                      }
+                  {toCurrency(eval(price))}
                 </TableCell>
                 <TableCell
                   padding="checkbox"
