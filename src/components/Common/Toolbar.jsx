@@ -25,13 +25,15 @@ const styles = () => ({
 })
 
 const Toolbar = ({
-  classes, options, currency, anchorEl, handleClick, handleClose, selectCurrency
+  classes, options, currency, anchorEl, handleClick, handleSearch, handleClose, selectCurrency
 }) => (
   <div className={classes.root}>
 
     <div className={classes.searchBar}>
       <div className={classes.searchIcon}>
-        <Search />
+        <Search
+          onChange={handleSearch}
+        />
       </div>
       <InputBase
         placeholder="Search…"

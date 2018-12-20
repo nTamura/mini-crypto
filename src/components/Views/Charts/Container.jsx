@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
-import ChartBody from 'components/Common/ChartBody'
-import Toolbar from 'components/Common/Toolbar'
 import axios from 'axios'
+import Toolbar from 'components/Common/Toolbar'
+import ChartBody from 'components/Common/ChartBody'
 import Loading from 'components/Common/Loading'
 
 const options = ['usd', 'cad']
@@ -11,16 +11,19 @@ class Container extends Component {
   constructor(props) {
     super(props)
 
-    const storageData = JSON.parse(
+    const storageFavorites = JSON.parse(
       localStorage.getItem('favorites')
+    )
+    const storageCurrency = JSON.parse(
+      localStorage.getItem('currency')
     )
 
     this.state = {
       isLoading: true,
       topChart: [],
-      favorites: storageData || [],
+      favorites: storageFavorites || [],
       anchorEl: null,
-      currency: 'usd'
+      currency: storageCurrency || 'usd'
     }
   }
 

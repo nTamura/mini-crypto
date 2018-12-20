@@ -28,7 +28,6 @@ class Container extends Component {
   }
 
   componentDidMount() {
-    // this.getFavorites('favorites')
     this.getChart(url)
     setInterval(() => { this.getChart(url) }, 30000)
   }
