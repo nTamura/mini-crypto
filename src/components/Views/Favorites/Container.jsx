@@ -5,7 +5,7 @@ import axios from 'axios'
 import Loading from 'components/Common/Loading'
 
 const options = ['usd', 'cad']
-const url = 'https://api.coinmarketcap.com/v1/ticker/?convert=CAD&limit=25'
+const url = 'https://api.coinmarketcap.com/v1/ticker/?convert=CAD&limit=100'
 
 class Container extends Component {
   constructor(props) {
@@ -20,7 +20,10 @@ class Container extends Component {
 
     this.state = {
       isLoading: true,
+      userInput: '',
+      chartData: [],
       personalChart: [],
+      filteredChart: [],
       favorites: storageFavorites || [],
       anchorEl: null,
       currency: storageCurrency || 'usd'
@@ -29,7 +32,7 @@ class Container extends Component {
 
   componentDidMount() {
     this.getChart(url)
-    setInterval(() => { this.getChart(url) }, 30000)
+    setInterval(() => { this.getChart(url) }, 180000)
   }
 
   handleClick = e => {
@@ -40,11 +43,24 @@ class Container extends Component {
     this.setState({ anchorEl: null })
   }
 
+  handleSearch = e => {
+    const { chartData } = this.state
+    const keyword = e.target.value.toLowerCase()
+
+    const filteredChart = Object.values(chartData)
+      .filter(result => (
+        result.name.toLowerCase().includes(keyword)
+        || result.symbol.toLowerCase().includes(keyword)
+      ))
+    this.setState({
+      filteredChart,
+      userInput: keyword
+    })
+  }
+
   selectCurrency = e => {
     const currency = e.target.getAttribute('value')
-    this.setState({
-      currency
-    }, () => {
+    this.setState({ currency }, () => {
       localStorage.setItem('currency', JSON.stringify(currency))
       this.handleClose()
     })
@@ -59,16 +75,12 @@ class Container extends Component {
     const { favorites } = this.state
     if (favorites.includes(item)) {
       const value = favorites.filter(i => i !== item)
-      this.setState({
-        favorites: value
-      }, () => {
+      this.setState({ favorites: value }, () => {
         localStorage.setItem('favorites', JSON.stringify([...value]))
       })
     } else {
       const value = favorites.concat(item)
-      this.setState({
-        favorites: value
-      }, () => {
+      this.setState({ favorites: value }, () => {
         localStorage.setItem('favorites', JSON.stringify([...value]))
       })
     }
@@ -88,7 +100,7 @@ class Container extends Component {
 
   render() {
     const {
-      isLoading, personalChart, anchorEl, currency
+      isLoading, personalChart, anchorEl, currency, filteredChart, userInput
     } = this.state
 
     return (
@@ -97,6 +109,7 @@ class Container extends Component {
           handleClick={e => { this.handleClick(e) }}
           handleClose={e => { this.handleClose(e) }}
           selectCurrency={e => { this.selectCurrency(e) }}
+          handleSearch={e => { this.handleSearch(e) }}
           anchorEl={anchorEl}
           currency={currency}
           options={options}
@@ -105,6 +118,8 @@ class Container extends Component {
           ? <Loading />
           : <ChartBody
             chartData={personalChart}
+            filteredChart={filteredChart}
+            userInput={userInput}
             currency={currency}
             favoritedItem={this.favoritedItem}
             toggleFavorite={this.toggleFavorite}

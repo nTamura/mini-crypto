@@ -59,7 +59,9 @@ class Container extends Component {
   }
 
   selectCurrency = e => {
-    this.setState({ currency: e.target.getAttribute('value') }, () => {
+    const currency = e.target.getAttribute('value')
+    this.setState({ currency }, () => {
+      localStorage.setItem('currency', JSON.stringify(currency))
       this.handleClose()
     })
   }
@@ -73,16 +75,12 @@ class Container extends Component {
     const { favorites } = this.state
     if (favorites.includes(item)) {
       const value = favorites.filter(i => i !== item)
-      this.setState({
-        favorites: value
-      }, () => {
+      this.setState({ favorites: value }, () => {
         localStorage.setItem('favorites', JSON.stringify([...value]))
       })
     } else {
       const value = favorites.concat(item)
-      this.setState({
-        favorites: value
-      }, () => {
+      this.setState({ favorites: value }, () => {
         localStorage.setItem('favorites', JSON.stringify([...value]))
       })
     }
