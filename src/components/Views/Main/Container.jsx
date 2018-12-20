@@ -1,10 +1,10 @@
 
 import React from 'react'
 
+import Body from 'components/Views/Main/Body'
+
 const Container = ({}) => (
-  <div>
-    Container
-  </div>
+  <Body />
 )
 
 export default Container
