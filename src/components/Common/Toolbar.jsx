@@ -31,11 +31,10 @@ const Toolbar = ({
 
     <div className={classes.searchBar}>
       <div className={classes.searchIcon}>
-        <Search
-          onChange={handleSearch}
-        />
+        <Search />
       </div>
       <InputBase
+        onChange={handleSearch}
         placeholder="Search…"
         classes={{
           root: classes.inputRoot,

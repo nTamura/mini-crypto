@@ -20,7 +20,9 @@ class Container extends Component {
 
     this.state = {
       isLoading: true,
-      topChart: [],
+      userInput: '',
+      chartData: [],
+      filteredChart: [],
       favorites: storageFavorites || [],
       anchorEl: null,
       currency: storageCurrency || 'usd'
@@ -39,6 +41,21 @@ class Container extends Component {
 
   handleClose = () => {
     this.setState({ anchorEl: null })
+  }
+
+  handleSearch = e => {
+    const { chartData } = this.state
+    const keyword = e.target.value.toLowerCase()
+
+    const filteredChart = Object.values(chartData)
+      .filter(result => (
+        result.name.toLowerCase().includes(keyword)
+        || result.symbol.toLowerCase().includes(keyword)
+      ))
+    this.setState({
+      filteredChart,
+      userInput: keyword
+    })
   }
 
   selectCurrency = e => {
@@ -74,7 +91,7 @@ class Container extends Component {
   getChart = api => {
     axios.get(api).then(res => {
       console.log(res.data)
-      this.setState({ topChart: res.data }, () => {
+      this.setState({ chartData: res.data }, () => {
         this.setState({ isLoading: false })
       })
     })
@@ -82,7 +99,7 @@ class Container extends Component {
 
   render() {
     const {
-      isLoading, topChart, anchorEl, currency
+      isLoading, chartData, filteredChart, anchorEl, currency, userInput
     } = this.state
 
     return (
@@ -91,6 +108,7 @@ class Container extends Component {
           handleClick={e => { this.handleClick(e) }}
           handleClose={e => { this.handleClose(e) }}
           selectCurrency={e => { this.selectCurrency(e) }}
+          handleSearch={e => { this.handleSearch(e) }}
           anchorEl={anchorEl}
           currency={currency}
           options={options}
@@ -98,7 +116,9 @@ class Container extends Component {
         { isLoading
           ? <Loading />
           : <ChartBody
-            chartData={topChart}
+            chartData={chartData}
+            filteredChart={filteredChart}
+            userInput={userInput}
             currency={currency}
             favoritedItem={this.favoritedItem}
             toggleFavorite={this.toggleFavorite}

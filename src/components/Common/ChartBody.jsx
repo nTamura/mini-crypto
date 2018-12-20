@@ -30,111 +30,132 @@ const styles = () => ({
 })
 
 const ChartBody = ({
-  currency, classes, chartData, favoritedItem, toggleFavorite
+  currency, classes, chartData, filteredChart, userInput, favoritedItem, toggleFavorite
 }) => {
   const marketCap = `coin.market_cap_${currency}`
   const price = `coin.price_${currency}`
 
+  let data
+  if (filteredChart.length || userInput.length) {
+    data = filteredChart
+  } else {
+    data = chartData
+  }
+
   return (
     <div className={classes.root}>
       <Paper className={classes.root}>
-        <Table className={classes.table}>
-          <TableHead>
-            <TableRow hover>
-              <TableCell padding="checkbox" />
-              <TableCell padding="none" align="center">
-                Rank
-              </TableCell>
-              <TableCell padding="checkbox">
-                Name
-              </TableCell>
-              <TableCell padding="none" align="right">
-                Market Cap
-              </TableCell>
-              <TableCell padding="checkbox" align="right">
-                Price
-              </TableCell>
-              <TableCell padding="checkbox" align="right">
-                Change (24h)
-              </TableCell>
-              <TableCell padding="checkbox" align="right">
-                Change (7d)
-              </TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {chartData.map(coin => (
-              <TableRow key={coin.id}>
-                <TableCell padding="checkbox" align="right">
-                  {favoritedItem(coin.symbol)
-                    ? <Star
-                      className={classes.star}
-                      onClick={() => {
-                        toggleFavorite(coin.symbol)
-                      }}
-                    />
-                    : <StarBorder
-                      onClick={() => {
-                        toggleFavorite(coin.symbol)
-                      }}
-                    />
-                  }
+
+        {data.length < 1 ? (
+          <Table className={classes.table}>
+            <TableBody>
+              <TableRow>
+                <TableCell align="center">
+                  <Typography variant="caption">
+                    No results in top 100
+                  </Typography>
                 </TableCell>
+              </TableRow>
+            </TableBody>
+          </Table>
+
+        ) : (
+          <Table className={classes.table}>
+            <TableHead>
+              <TableRow hover>
+                <TableCell padding="checkbox" />
                 <TableCell padding="none" align="center">
-                  {coin.rank}
+                  Rank
                 </TableCell>
-                <TableCell padding="checkbox" component="th" scope="row" className={classes.cellOverflow}>
-                  <Typography variant="body1">
-                    <i className={[classes.icon, `${coin.symbol}`, 'cc'].join(' ')} />
-                    {coin.symbol}
-                  </Typography>
-
-                  <Typography variant="caption" noWrap>
-                    {coin.name}
-                  </Typography>
-
+                <TableCell padding="checkbox">
+                  Name
                 </TableCell>
                 <TableCell padding="none" align="right">
-                  <Typography className={classes.digits}>
-
-                    {toCurrency(eval(marketCap))}
-                  </Typography>
+                  Market Cap
                 </TableCell>
                 <TableCell padding="checkbox" align="right">
-                  <Typography className={classes.digits}>
-
-                    {toCurrency(eval(price))}
-                  </Typography>
+                  Price
                 </TableCell>
                 <TableCell padding="checkbox" align="right">
-                  <Typography className={[
-                    classes.digits,
-                    coin.percent_change_24h > 0
-                      ? `${classes.up}`
-                      : `${classes.down}`
-                  ].join(' ')}
-                  >
-                    {`${coin.percent_change_24h}%`}
-                  </Typography>
+                  Change (24h)
                 </TableCell>
                 <TableCell padding="checkbox" align="right">
-                  <Typography className={[
-                    classes.digits,
-                    coin.percent_change_7d > 0
-                      ? `${classes.up}`
-                      : `${classes.down}`
-                  ].join(' ')}
-                  >
-                    {`${coin.percent_change_7d}%`}
-                  </Typography>
+                  Change (7d)
                 </TableCell>
-
               </TableRow>
-            ))}
-            <TableRow />
-          </TableBody>
-
-        </Table>
+            </TableHead>
+            <TableBody>
+              {data.map(coin => (
+                <TableRow key={coin.id}>
+                  <TableCell padding="checkbox" align="right">
+                    {favoritedItem(coin.symbol) ? (
+                      <Star
+                        className={classes.star}
+                        onClick={() => { toggleFavorite(coin.symbol) }}
+                      />
+                    ) : (
+                      <StarBorder
+                        onClick={() => { toggleFavorite(coin.symbol) }}
+                      />
+                    )}
+                  </TableCell>
+                  <TableCell padding="none" align="center">
+                    {coin.rank}
+                  </TableCell>
+                  <TableCell
+                    padding="checkbox"
+                    component="th"
+                    scope="row"
+                    className={classes.cellOverflow}
+                  >
+                    <Typography variant="body1">
+                      <i className={[
+                        classes.icon, `${coin.symbol}`, 'cc'
+                      ].join(' ')}
+                      />
+                      {coin.symbol}
+                    </Typography>
+                    <Typography variant="caption" noWrap>
+                      {coin.name}
+                    </Typography>
+                  </TableCell>
+                  <TableCell padding="none" align="right">
+                    <Typography className={classes.digits}>
+                      {toCurrency(eval(marketCap))}
+                    </Typography>
+                  </TableCell>
+                  <TableCell padding="checkbox" align="right">
+                    <Typography className={classes.digits}>
+                      {toCurrency(eval(price))}
+                    </Typography>
+                  </TableCell>
+                  <TableCell padding="checkbox" align="right">
+                    <Typography className={[
+                      classes.digits,
+                      coin.percent_change_24h > 0
+                        ? `${classes.up}`
+                        : `${classes.down}`
+                    ].join(' ')}
+                    >
+                      {`${coin.percent_change_24h}%`}
+                    </Typography>
+                  </TableCell>
+                  <TableCell padding="checkbox" align="right">
+                    <Typography className={[
+                      classes.digits,
+                      coin.percent_change_7d > 0
+                        ? `${classes.up}`
+                        : `${classes.down}`
+                    ].join(' ')}
+                    >
+                      {`${coin.percent_change_7d}%`}
+                    </Typography>
+                  </TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+        )}
       </Paper>
     </div>
   )
