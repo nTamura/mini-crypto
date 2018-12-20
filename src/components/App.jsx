@@ -1,23 +1,17 @@
 import React, { Component } from 'react'
 import { Route, Switch } from 'react-router-dom'
 import { withStyles } from '@material-ui/core/styles'
-
 import Navbar from 'components/Navigation/Navbar'
 import Footer from 'components/Navigation/Footer'
-import Header from 'components/Common/Header'
 import Main from 'components/Views/Main'
 import About from 'components/Views/About'
 import Charts from 'components/Views/Charts'
 import Favorites from 'components/Views/Favorites'
-import background from 'styles/prism.png'
+import NotFound from 'components/Views/NotFound'
 
 const styles = () => ({
   app: {
-    // backgroundImage: `url(${background})`
-    // backgroundColor: '#323232'
-    // backgroundColor: '#484B5B'34353F
     background: 'linear-gradient(to right bottom, #484B5B, #34353F)'
-
   },
   root: {
     paddingBottom: 32,
@@ -31,9 +25,7 @@ class App extends Component {
     }
   }
 
-  componentDidMount() {
-    console.log(this.props)
-  }
+  componentDidMount() {}
 
   render() {
     const { classes } = this.props
@@ -47,6 +39,7 @@ class App extends Component {
               <Route exact path="/charts" component={Charts} />
               <Route exact path="/favorites" component={Favorites} />
               <Route exact path="/about" component={About} />
+              <Route component={NotFound} />
             </Switch>
           </div>
         </div>
