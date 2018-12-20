@@ -12,6 +12,11 @@ const CustomTheme = createMuiTheme({
     }
   },
   overrides: {
+    MuiPaper: {
+      root: {
+        background: 'linear-gradient(to right bottom, #5C5E69, #393D48)'
+      }
+    }
   }
 })
 

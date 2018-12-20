@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
-import ChartBody from 'components/Views/Charts/ChartBody'
-import Toolbar from 'components/Views/Charts/Toolbar'
+import ChartBody from 'components/Common/ChartBody'
+import Toolbar from 'components/Common/Toolbar'
 import axios from 'axios'
 import Loading from 'components/Common/Loading'
 
@@ -25,9 +25,9 @@ class Container extends Component {
   }
 
   componentDidMount() {
-    // this.getFavorites('favorites')
     this.getChart(url)
-    setInterval(() => { this.getChart(url) }, 30000)
+    setInterval(() => { this.getChart(url) }, 180000)
+    // TODO: add last updated at __
   }
 
   handleClick = e => {
@@ -95,7 +95,7 @@ class Container extends Component {
         { isLoading
           ? <Loading />
           : <ChartBody
-            topChart={topChart}
+            chartData={topChart}
             currency={currency}
             favoritedItem={this.favoritedItem}
             toggleFavorite={this.toggleFavorite}

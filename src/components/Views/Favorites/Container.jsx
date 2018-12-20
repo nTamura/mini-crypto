@@ -1,10 +1,119 @@
+import React, { Component } from 'react'
+import ChartBody from 'components/Common/ChartBody'
+import Toolbar from 'components/Common/Toolbar'
+import axios from 'axios'
+import Loading from 'components/Common/Loading'
 
-import React from 'react'
+const options = ['usd', 'cad']
+const url = 'https://api.coinmarketcap.com/v1/ticker/?convert=CAD&limit=25'
 
-const Container = ({}) => (
-  <div>
-    Container
-  </div>
-)
+class Container extends Component {
+  constructor(props) {
+    super(props)
+
+    const storageFavorites = JSON.parse(
+      localStorage.getItem('favorites')
+    )
+    const storageCurrency = JSON.parse(
+      localStorage.getItem('currency')
+    )
+
+    this.state = {
+      isLoading: true,
+      personalChart: [],
+      favorites: storageFavorites || [],
+      anchorEl: null,
+      currency: storageCurrency || 'usd'
+    }
+  }
+
+  componentDidMount() {
+    // this.getFavorites('favorites')
+    this.getChart(url)
+    setInterval(() => { this.getChart(url) }, 30000)
+  }
+
+  handleClick = e => {
+    this.setState({ anchorEl: e.currentTarget })
+  }
+
+  handleClose = () => {
+    this.setState({ anchorEl: null })
+  }
+
+  selectCurrency = e => {
+    const currency = e.target.getAttribute('value')
+    this.setState({
+      currency
+    }, () => {
+      localStorage.setItem('currency', JSON.stringify(currency))
+      this.handleClose()
+    })
+  }
+
+  favoritedItem = item => {
+    const { favorites } = this.state
+    return favorites.includes(item)
+  }
+
+  toggleFavorite = item => {
+    const { favorites } = this.state
+    if (favorites.includes(item)) {
+      const value = favorites.filter(i => i !== item)
+      this.setState({
+        favorites: value
+      }, () => {
+        localStorage.setItem('favorites', JSON.stringify([...value]))
+      })
+    } else {
+      const value = favorites.concat(item)
+      this.setState({
+        favorites: value
+      }, () => {
+        localStorage.setItem('favorites', JSON.stringify([...value]))
+      })
+    }
+  }
+
+  getChart = api => {
+    const { favorites } = this.state
+    axios.get(api).then(res => {
+      const favoritesList = res.data.filter(coin => (
+        favorites.includes(coin.symbol)
+      ))
+      this.setState({ personalChart: favoritesList }, () => {
+        this.setState({ isLoading: false })
+      })
+    })
+  }
+
+  render() {
+    const {
+      isLoading, personalChart, anchorEl, currency
+    } = this.state
+
+    return (
+      <div>
+        <Toolbar
+          handleClick={e => { this.handleClick(e) }}
+          handleClose={e => { this.handleClose(e) }}
+          selectCurrency={e => { this.selectCurrency(e) }}
+          anchorEl={anchorEl}
+          currency={currency}
+          options={options}
+        />
+        { isLoading
+          ? <Loading />
+          : <ChartBody
+            chartData={personalChart}
+            currency={currency}
+            favoritedItem={this.favoritedItem}
+            toggleFavorite={this.toggleFavorite}
+          />
+        }
+      </div>
+    )
+  }
+}
 
 export default Container

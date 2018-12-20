@@ -6,9 +6,12 @@ import { Menu as MenuIcon, Star, TrendingUp } from '@material-ui/icons'
 import GoBack from 'components/Common/GoBack'
 import { withRouter } from 'react-router-dom'
 
+import background from 'styles/prism.png'
+
 const styles = () => ({
   root: {
-    padding: 16
+    padding: 16,
+    backgroundColor: '#34353F'
   },
   menuBar: {
     display: 'flex',
