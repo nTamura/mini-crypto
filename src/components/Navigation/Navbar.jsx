@@ -78,8 +78,6 @@ class Navbar extends Component {
           <div className={classes.titleContainer}>
 
             <Typography
-              component={Link}
-              to="/"
               variant="h6"
               className={classes.title}
             >
