@@ -2,9 +2,8 @@ import React from 'react'
 import { withStyles } from '@material-ui/core/styles'
 import { Typography, Table, TableBody, TableCell, TableHead, TableRow, Paper } from '@material-ui/core'
 import { Star, StarBorder } from '@material-ui/icons'
+import CoinSymbol from 'components/Common/CoinSymbol'
 import toCurrency from 'Helpers/toCurrency'
-import 'cryptocoins-icons/webfont/cryptocoins.css'
-import 'cryptocoins-icons/webfont/cryptocoins-colors.css'
 
 const styles = () => ({
   root: {
@@ -18,15 +17,12 @@ const styles = () => ({
   cellOverflow: {
     maxWidth: 80,
   },
-  icon: {
-    paddingRight: 6
-  },
   digits: {
     fontFamily: 'monospace'
   },
-  star: { color: '#f1e325' },
   up: { color: '#2cac48' },
-  down: { color: '#e72121' }
+  down: { color: '#e72121' },
+  star: { color: '#f1e325' },
 })
 
 const ChartBody = ({
@@ -85,7 +81,7 @@ const ChartBody = ({
               </TableRow>
             </TableHead>
             <TableBody>
-              {data.map(coin => (
+              {data.slice(0, 25).map(coin => (
                 <TableRow key={coin.id}>
                   <TableCell padding="checkbox" align="right">
                     {favoritedItem(coin.symbol) ? (
@@ -109,10 +105,7 @@ const ChartBody = ({
                     className={classes.cellOverflow}
                   >
                     <Typography variant="body1">
-                      <i className={[
-                        classes.icon, `${coin.symbol}`, 'cc'
-                      ].join(' ')}
-                      />
+                      <CoinSymbol symbol={coin.symbol} />
                       {coin.symbol}
                     </Typography>
                     <Typography variant="caption" noWrap>

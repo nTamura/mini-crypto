@@ -5,7 +5,7 @@ import ChartBody from 'components/Common/ChartBody'
 import Loading from 'components/Common/Loading'
 
 const options = ['usd', 'cad']
-const url = 'https://api.coinmarketcap.com/v1/ticker/?convert=CAD&limit=25'
+const url = 'https://api.coinmarketcap.com/v1/ticker/?convert=CAD&limit=100'
 
 class Container extends Component {
   constructor(props) {
