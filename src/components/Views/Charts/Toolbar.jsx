@@ -1,8 +1,7 @@
 import React from 'react'
 import { withStyles } from '@material-ui/core/styles'
-
 import { ArrowDropDown, Search } from '@material-ui/icons'
-import { IconButton, Menu, MenuItem, InputBase } from '@material-ui/core'
+import { Menu, MenuItem, InputBase, Typography } from '@material-ui/core'
 
 const styles = () => ({
   root: {
@@ -11,6 +10,7 @@ const styles = () => ({
     justifyContent: 'space-between'
   },
   currencyDropdown: {
+    display: 'flex',
     fontSize: '1rem'
   },
   searchBar: {
@@ -42,18 +42,17 @@ const Toolbar = ({
       />
     </div>
 
-    <IconButton
-      aria-label="More"
-      aria-owns={anchorEl ? 'long-menu' : null}
+    <Typography
+      aria-owns={anchorEl ? 'menu' : undefined}
       aria-haspopup="true"
       onClick={handleClick}
       className={classes.currencyDropdown}
     >
       {currency.toUpperCase()}
       <ArrowDropDown />
-    </IconButton>
+    </Typography>
     <Menu
-      id="long-menu"
+      id="menu"
       anchorEl={anchorEl}
       open={Boolean(anchorEl)}
       onClose={handleClose}
