@@ -3,6 +3,7 @@ import { Route, Switch } from 'react-router-dom'
 import { withStyles } from '@material-ui/core/styles'
 
 import Navbar from 'components/Navigation/Navbar'
+import Footer from 'components/Navigation/Footer'
 import Header from 'components/Common/Header'
 import Main from 'components/Views/Main'
 import About from 'components/Views/About'
@@ -49,12 +50,7 @@ class App extends Component {
             </Switch>
           </div>
         </div>
-        <div style={{
-          backgroundColor: '#34353F'
-        }}
-        >
-          footer
-        </div>
+        <Footer />
       </>
     )
   }

@@ -1,12 +1,13 @@
 # React-Crypto-Chart
-React-Crypto-Chart is a lightweight mobile crypto chart. 
+React-Crypto-Chart is a lightweight crypto chart designed to be used on your mobile device for a quick overview of your favorite coins.
 
-Pulls API data from [CoinMarketCap](https://coinmarketcap.com/) and displays the top 25 Cryptocurrencies. Charts auto refresh every 3 minutes, with up or down tickers on the 24 hour volume.
-
-Alternatively, search and mark coins as favorites to view them in a separate tab.
+### Features
+- Pulls the global top 25 coins, with auto refresh
+- Option to add coins to favorites
+- View coins in CAD or USD
+- App stores favorites and preferred currency on device
 
 ![screen](https://raw.githubusercontent.com/nTamura/react-crypto-charts/master/public/screen.png)
-
 
 ### To Start
 Paste the text block into terminal:
@@ -14,14 +15,19 @@ Paste the text block into terminal:
 git clone https://github.com/nTamura/react-crypto-charts.git
 && cd react-crypto-charts
 && npm i
+&& npm start
 ```
 
-<!-- ### TODO
+### TODO
 - Fill sprites for coins with no icons
-- Personal charts, add favorite coins to state
-- Home page content
-- Search input autocomplete
-- Sort table -->
+- Select in depth view of coins
+- Live search for coins, with autocomplete
+- Sort table
+- 'Your portfolio' - add coins to view your portfolio worth
+
+
+
+---
 
 Credits to [Coinmarketcap](https://coinmarketcap.com/) for API and [allienworks/cryptocoins](https://github.com/allienworks/cryptocoins)
 for their webfont icon pack.
