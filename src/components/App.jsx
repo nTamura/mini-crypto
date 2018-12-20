@@ -25,8 +25,6 @@ class App extends Component {
     }
   }
 
-  componentDidMount() {}
-
   render() {
     const { classes } = this.props
     return (

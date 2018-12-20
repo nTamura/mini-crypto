@@ -1,25 +1,26 @@
 import React from 'react'
-// import PropTypes from 'prop-types'
+import PropTypes from 'prop-types'
+import { withStyles } from '@material-ui/core/styles'
+import { withRouter } from 'react-router-dom'
 import { KeyboardArrowLeft } from '@material-ui/icons'
+import { IconButton } from '@material-ui/core'
 
-
-// if page is not root, go back to previous page
-// or go up a path?
-
-const GoBack = ({}) => {
-  const handleClick = () => {
-
+const styles = () => ({
+  icon: {
+    color: '#FFF'
   }
+})
 
-  return (
-    <div onClick={handleClick}>
-      <KeyboardArrowLeft />
-    </div>
-  )
-}
+
+const GoBack = ({ classes, history }) => (
+  <IconButton onClick={history.goBack}>
+    <KeyboardArrowLeft className={classes.icon} />
+  </IconButton>
+)
 
 GoBack.propTypes = {
-  // : PropTypes.
+  classes: PropTypes.object.isRequired,
+  history: PropTypes.object.isRequired,
 }
 
-export default GoBack
+export default withRouter(withStyles(styles)(GoBack))

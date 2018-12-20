@@ -1,12 +1,9 @@
 import React, { Component } from 'react'
-import { Link } from 'react-router-dom'
+import { withRouter, Link } from 'react-router-dom'
 import { SwipeableDrawer, Typography, IconButton, Divider } from '@material-ui/core'
 import { withStyles } from '@material-ui/core/styles'
 import { Menu as MenuIcon, Star, TrendingUp } from '@material-ui/icons'
 import GoBack from 'components/Common/GoBack'
-import { withRouter } from 'react-router-dom'
-
-import background from 'styles/prism.png'
 
 const styles = () => ({
   root: {
@@ -64,6 +61,8 @@ class Navbar extends Component {
         return 'Global Charts'
       case '/favorites':
         return 'Personal Charts'
+      case '/portfolio':
+        return 'Your Portfolio'
       default:
         return 'Crypto Charts'
     }
