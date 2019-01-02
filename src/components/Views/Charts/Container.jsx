@@ -3,6 +3,7 @@ import axios from 'axios'
 import Toolbar from 'components/Common/Toolbar'
 import ChartBody from 'components/Common/ChartBody'
 import Loading from 'components/Common/Loading'
+import ShowMore from 'components/Common/ShowMore'
 
 const options = ['usd', 'cad']
 const url = 'https://api.coinmarketcap.com/v1/ticker/?convert=CAD&limit=100'
@@ -23,6 +24,7 @@ class Container extends Component {
       userInput: '',
       chartData: [],
       filteredChart: [],
+      rowsToDisplay: 25,
       favorites: storageFavorites || [],
       anchorEl: null,
       currency: storageCurrency || 'usd'
@@ -55,6 +57,13 @@ class Container extends Component {
     this.setState({
       filteredChart,
       userInput: keyword
+    })
+  }
+
+  showMore = () => {
+    let { rowsToDisplay: rows } = this.state
+    this.setState({
+      rowsToDisplay: rows += 25
     })
   }
 
@@ -97,7 +106,8 @@ class Container extends Component {
 
   render() {
     const {
-      isLoading, chartData, filteredChart, anchorEl, currency, userInput
+      isLoading, chartData, filteredChart, anchorEl, currency,
+      userInput, rowsToDisplay
     } = this.state
 
     return (
@@ -113,14 +123,18 @@ class Container extends Component {
         />
         { isLoading
           ? <Loading />
-          : <ChartBody
-            chartData={chartData}
-            filteredChart={filteredChart}
-            userInput={userInput}
-            currency={currency}
-            favoritedItem={this.favoritedItem}
-            toggleFavorite={this.toggleFavorite}
-          />
+          : <>
+            <ChartBody
+              chartData={chartData}
+              filteredChart={filteredChart}
+              userInput={userInput}
+              currency={currency}
+              rowsToDisplay={rowsToDisplay}
+              favoritedItem={this.favoritedItem}
+              toggleFavorite={this.toggleFavorite}
+            />
+            <ShowMore showMore={this.showMore} />
+          </>
         }
       </div>
     )

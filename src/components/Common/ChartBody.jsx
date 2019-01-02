@@ -26,11 +26,11 @@ const styles = () => ({
 })
 
 const ChartBody = ({
-  currency, classes, chartData, filteredChart, userInput, favoritedItem, toggleFavorite
+  currency, classes, chartData, filteredChart, userInput,
+  favoritedItem, toggleFavorite, rowsToDisplay
 }) => {
   const marketCap = `coin.market_cap_${currency}`
   const price = `coin.price_${currency}`
-
   let data
   if (filteredChart.length || userInput.length) {
     data = filteredChart
@@ -81,7 +81,7 @@ const ChartBody = ({
               </TableRow>
             </TableHead>
             <TableBody>
-              {data.slice(0, 25).map(coin => (
+              {data.slice(0, rowsToDisplay).map(coin => (
                 <TableRow key={coin.id}>
                   <TableCell padding="checkbox" align="right">
                     {favoritedItem(coin.symbol) ? (

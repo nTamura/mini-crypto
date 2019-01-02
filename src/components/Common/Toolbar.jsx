@@ -1,4 +1,6 @@
 import React from 'react'
+import { withRouter, Link } from 'react-router-dom'
+
 import { withStyles } from '@material-ui/core/styles'
 import { ArrowDropDown, Search } from '@material-ui/icons'
 import { Menu, MenuItem, InputBase, Typography } from '@material-ui/core'
@@ -15,7 +17,8 @@ const styles = () => ({
   },
   searchBar: {
     display: 'flex',
-    alignItems: 'center'
+    alignItems: 'center',
+    height: 53
   },
   searchIcon: {
     color: '#FFF',
@@ -25,22 +28,26 @@ const styles = () => ({
 })
 
 const Toolbar = ({
-  classes, options, currency, anchorEl, handleClick, handleSearch, handleClose, selectCurrency
+  classes, match, options, currency, anchorEl, handleClick,
+  handleSearch, handleClose, selectCurrency
 }) => (
   <div className={classes.root}>
-
     <div className={classes.searchBar}>
-      <div className={classes.searchIcon}>
-        <Search />
-      </div>
-      <InputBase
-        onChange={handleSearch}
-        placeholder="Search…"
-        classes={{
-          root: classes.inputRoot,
-          input: classes.inputInput,
-        }}
-      />
+      { match.path === '/charts' && (
+        <>
+          <div className={classes.searchIcon}>
+            <Search />
+          </div>
+          <InputBase
+            onChange={handleSearch}
+            placeholder="Search…"
+            classes={{
+              root: classes.inputRoot,
+              input: classes.inputInput,
+            }}
+          />
+        </>
+      )}
     </div>
 
     <Typography
@@ -72,4 +79,4 @@ const Toolbar = ({
   </div>
 )
 
-export default withStyles(styles)(Toolbar)
+export default withRouter(withStyles(styles)(Toolbar))

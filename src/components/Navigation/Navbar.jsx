@@ -35,6 +35,12 @@ const styles = () => ({
     alignItems: 'center',
     padding: 16
   },
+  flex: {
+    display: 'flex',
+    flexDirection: 'column',
+    height: '100%',
+    justifyContent: 'space-between'
+  },
   icon: {
     paddingRight: 14,
     color: 'red'
@@ -112,34 +118,45 @@ class Navbar extends Component {
             role="button"
             onClick={this.toggleDrawer(false)}
             onKeyDown={this.toggleDrawer(false)}
+            className={classes.flex}
           >
+            <div>
+              <Typography
+                component={Link}
+                to="/"
+                variant="subtitle1"
+                className={classes.drawerTitle}
+              >
+                React-Crypto App
+              </Typography>
+              <Divider />
+              <Typography
+                component={Link}
+                to="/charts"
+                variant="subtitle1"
+                className={classes.navLink}
+              >
+                <TrendingUp className={classes.icon} />
+                Global Charts
+              </Typography>
+              <Typography
+                component={Link}
+                to="/favorites"
+                variant="subtitle1"
+                className={classes.navLink}
+              >
+                <Star className={classes.icon} />
+                Personal Charts
+              </Typography>
+
+            </div>
             <Typography
-              component={Link}
-              to="/"
-              variant="subheading"
-              className={classes.drawerTitle}
-            >
-              React-Crypto App
-            </Typography>
-            <Divider />
-            <Typography
-              component={Link}
-              to="/charts"
-              variant="subheading"
+              variant="body2"
               className={classes.navLink}
             >
-              <TrendingUp className={classes.icon} />
-              Global Charts
+              {/* Personal Charts */}
             </Typography>
-            <Typography
-              component={Link}
-              to="/favorites"
-              variant="subheading"
-              className={classes.navLink}
-            >
-              <Star className={classes.icon} />
-              Personal Charts
-            </Typography>
+
           </div>
         </SwipeableDrawer>
       </div>
