@@ -1,5 +1,5 @@
 # React-Crypto-Chart
-React-Crypto-Chart is a lightweight crypto chart designed to be used on your mobile device for a quick overview of your favorite coins.
+React-Crypto-Chart is a lightweight crypto tracker designed to be used on your mobile device for a quick overview of your favorite coins.
 
 ### Features
 - Pulls the global top 25 coins, with auto refresh
@@ -24,7 +24,7 @@ git clone https://github.com/nTamura/react-crypto-charts.git
 - Live search for coins, with autocomplete
 - Sort table
 - 'Your portfolio' - add coins to view your portfolio worth
-
+- News feed
 
 
 ---
