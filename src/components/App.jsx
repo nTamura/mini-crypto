@@ -11,6 +11,7 @@ import NotFound from 'components/Views/NotFound'
 
 const styles = () => ({
   app: {
+    flex: 1,
     background: 'linear-gradient(to right bottom, #484B5B, #34353F)'
   },
   root: {
@@ -29,8 +30,8 @@ class App extends Component {
     const { classes } = this.props
     return (
       <>
+        <Navbar />
         <div id="App" className={classes.app}>
-          <Navbar />
           <div className={[classes.root, 'container'].join(' ')}>
             <Switch>
               <Route exact path="/" component={Main} />
