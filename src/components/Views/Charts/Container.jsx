@@ -133,7 +133,10 @@ class Container extends Component {
               favoritedItem={this.favoritedItem}
               toggleFavorite={this.toggleFavorite}
             />
-            <ShowMore showMore={this.showMore} />
+            <ShowMore
+              showMore={this.showMore}
+              rowsToDisplay={rowsToDisplay}
+            />
           </>
         }
       </div>
