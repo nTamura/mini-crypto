@@ -1,1 +1,5 @@
-{}
+{
+  "projects": {
+    "staging": "crypto-tracker-71117"
+  }
+}
