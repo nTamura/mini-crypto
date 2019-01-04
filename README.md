@@ -1,22 +1,45 @@
 # React-Crypto-Chart
+React-Crypto-Chart is a lightweight crypto tracker designed to be used on your mobile device for a quick overview of your favorite coins.
 
-`complete rework in process`
-
-Pulls API data from Coinmarketcap and displays the top 25 Cryptocurrencies. Charts auto refresh every 3 minutes, with up or down tickers on the 24 hour volume.
+### Features
+- Pulls the global top 100 coins, with auto refresh intervals
+- View coin prices in CAD or USD
+- Newsfeed pulls trending news using popular crypto keywords
+- Quickly view only the coins you care about using favorites
+- App stores favorites and preferred currency on device
 
 ![screen](https://raw.githubusercontent.com/nTamura/react-crypto-charts/master/public/screen.png)
- 
-### TODO
+
+### Dev Prerequisites
+If you are looking to build on top of this, you must apply for an API key
+- register for free [API key here](https://newsapi.org/register)
+- create a .env file in root folder
+- replace xxx with your API key ( REACT_APP_NEWS_API_KEY=xxx )
+- restart react server
+
+### To Start
+Paste the text block into terminal:
+```
+git clone https://github.com/nTamura/mini-crypto.git
+&& cd react-crypto-charts
+&& npm i
+&& npm start
+```
+
+
+
+##### TODO
 - Fill sprites for coins with no icons
-- Personal charts, add favorite coins to state
-- Home page content
-- Search input autocomplete
+- Select in depth view of coins
+- Live search for coins, with autocomplete
 - Sort table
+- 'Your portfolio' - add coins to view your portfolio worth
+- News feed
 
 
-Create a ‘.env’ file at the root level
-Set an environment variable `NODE_PATH` to `src/`
+---
 
-
-Credits to [Coinmarketcap](https://coinmarketcap.com/) for API and [allienworks/cryptocoins](https://github.com/allienworks/cryptocoins)
-for their webfont icon pack.
+Credits:
+- [Coinmarketcap](https://coinmarketcap.com/)
+- [NewsAPI](https://newsapi.org/)
+- [allienworks/cryptocoins](https://github.com/allienworks/cryptocoins)

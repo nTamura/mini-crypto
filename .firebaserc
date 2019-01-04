@@ -1,0 +1,6 @@
+{
+  "projects": {
+    "staging": "mini-crypto",
+    "default": "crypto-tracker-71117"
+  }
+}
