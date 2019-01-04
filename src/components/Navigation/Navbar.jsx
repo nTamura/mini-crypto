@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { withRouter, Link } from 'react-router-dom'
 import { SwipeableDrawer, Typography, IconButton, Divider } from '@material-ui/core'
 import { withStyles } from '@material-ui/core/styles'
-import { Menu as MenuIcon, Star, InsertChartOutlined, TrendingUp, Equalizer, Language } from '@material-ui/icons'
+import { Menu as MenuIcon, Star, TrendingUp, Equalizer, Language } from '@material-ui/icons'
 import GoBack from 'components/Common/GoBack'
 
 const styles = () => ({
@@ -139,11 +139,8 @@ class Navbar extends Component {
             className={classes.flex}
           >
             <div>
-              <Typography
-                variant="subtitle1"
-                className={classes.drawerTitle}
-              >
-                React-Crypto App
+              <Typography variant="subtitle1" className={classes.drawerTitle}>
+                Mini-Crypto
               </Typography>
 
               <Divider />
