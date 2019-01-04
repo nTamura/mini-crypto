@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React from 'react'
 import { Route, Switch } from 'react-router-dom'
 import { withStyles } from '@material-ui/core/styles'
 import Navbar from 'components/Navigation/Navbar'
@@ -19,33 +19,22 @@ const styles = () => ({
   }
 })
 
-class App extends Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-    }
-  }
-
-  render() {
-    const { classes } = this.props
-    return (
-      <>
-        <Navbar />
-        <div id="App" className={classes.app}>
-          <div className={[classes.root, 'container'].join(' ')}>
-            <Switch>
-              <Route exact path="/" component={Main} />
-              <Route exact path="/charts" component={Charts} />
-              <Route exact path="/favorites" component={Favorites} />
-              <Route exact path="/about" component={About} />
-              <Route component={NotFound} />
-            </Switch>
-          </div>
-        </div>
-        <Footer />
-      </>
-    )
-  }
-}
+const App = ({ classes }) => (
+  <>
+    <Navbar />
+    <div id="App" className={classes.app}>
+      <div className={[classes.root, 'container'].join(' ')}>
+        <Switch>
+          <Route exact path="/" component={Main} />
+          <Route exact path="/charts" component={Charts} />
+          <Route exact path="/favorites" component={Favorites} />
+          <Route exact path="/about" component={About} />
+          <Route component={NotFound} />
+        </Switch>
+      </div>
+    </div>
+    <Footer />
+  </>
+)
 
 export default withStyles(styles)(App)

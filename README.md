@@ -3,7 +3,7 @@ Mini-Crypto is a mini crypto tracker designed to be used on your mobile device f
 
 ### Features
 - Pulls the global top 100 coins, with auto refresh intervals
-- Search to quickly add to favorites, with live updating results 
+- Search to quickly add to favorites, with live updating results
 - View coin prices in CAD or USD
 - Newsfeed pulls trending news using popular crypto keywords
 - Quickly view only the coins you care about using favorites
@@ -24,7 +24,7 @@ If you are looking to build on top of this, you must apply for an API key
 Paste the text block into terminal:
 ```
 git clone https://github.com/nTamura/mini-crypto.git
-&& cd react-crypto-charts
+&& cd mini-crypto
 && npm i
 && npm start
 ```
@@ -32,11 +32,14 @@ git clone https://github.com/nTamura/mini-crypto.git
 ##### TODO
 - PWA add to homescreen shortcut
 - Fill sprites for coins with no icons
-- Select in depth view of coins
-- Sort table
+- Click on individual coins to view more detail in accordion
+- Sort table by
 - 'Your portfolio' - add coins to view your portfolio worth
-- News feed
 
+<!-- fix
+  !showMore if result.length, apply to search, favorites, etc
+  add fetch data button for manual get
+-->
 
 ---
 

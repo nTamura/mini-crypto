@@ -1,8 +1,7 @@
 import React from 'react'
 import { withStyles } from '@material-ui/core/styles'
-import { Typography, Button, Paper } from '@material-ui/core'
-import { Link } from 'react-router-dom'
-import { Link as LinkIcon, InsertChart, Dashboard, TrendingUp, InsertChartOutlined } from '@material-ui/icons'
+import { Typography, Button } from '@material-ui/core'
+import { Link as LinkIcon, TrendingUp } from '@material-ui/icons'
 import toDate from 'Helpers/toDate'
 import Card from '@material-ui/core/Card'
 import CardActions from '@material-ui/core/CardActions'
@@ -48,56 +47,51 @@ const styles = () => ({
 const NewsBody = ({
   currency, classes, newsData, filteredChart, userInput,
   favoritedItem, toggleFavorite, rowsToDisplay
-}) => {
-  const x = [...Array(6)]
-  return (
-
-    <div className={classes.root}>
-      <div className={classes.titleContainer}>
-        <TrendingUp className={classes.icon} />
-        <Typography variant="h6">
-          Trending Crypto News
-        </Typography>
-      </div>
-
-      <div className={classes.cardsList}>
-        {newsData.slice(0, rowsToDisplay).map(article => (
-          <Card className={classes.card}>
-            <CardContent>
-              <div className={classes.flex}>
-                <Typography variant="caption" gutterBottom>
-                  {article.source.name}
-                </Typography>
-                <Typography variant="caption" color="textSecondary">
-                  {toDate(article.publishedAt)}
-                </Typography>
-              </div>
-              <img
-                src={article.urlToImage}
-                className={classes.previewImg}
-                alt="article preview"
-              />
-              <Typography variant="h6" className={classes.title} gutterBottom>
-                {article.title}
-              </Typography>
-              <Typography component="p">
-                {article.description}
-              </Typography>
-
-            </CardContent>
-            <CardActions>
-              <Button size="medium" component="a" href={article.url}>
-                <LinkIcon className={classes.linkIcon} />
-                Read more
-                {/* open new tab */}
-              </Button>
-            </CardActions>
-          </Card>
-
-        ))}
-      </div>
+}) => (
+  <div className={classes.root}>
+    <div className={classes.titleContainer}>
+      <TrendingUp className={classes.icon} />
+      <Typography variant="h6">
+        Trending Crypto News
+      </Typography>
     </div>
 
-  )
-}
+    <div className={classes.cardsList}>
+      {newsData.slice(0, rowsToDisplay).map(article => (
+        <Card className={classes.card}>
+          <CardContent>
+            <div className={classes.flex}>
+              <Typography variant="caption" gutterBottom>
+                {article.source.name}
+              </Typography>
+              <Typography variant="caption" color="textSecondary">
+                {toDate(article.publishedAt)}
+              </Typography>
+            </div>
+            <img
+              src={article.urlToImage}
+              className={classes.previewImg}
+              alt="article preview"
+            />
+            <Typography variant="h6" className={classes.title} gutterBottom>
+              {article.title}
+            </Typography>
+            <Typography component="p">
+              {article.description}
+            </Typography>
+
+          </CardContent>
+          <CardActions>
+            <Button size="medium" component="a" href={article.url}>
+              <LinkIcon className={classes.linkIcon} />
+              Read more
+              {/* open new tab */}
+            </Button>
+          </CardActions>
+        </Card>
+      ))}
+    </div>
+  </div>
+)
+
 export default withStyles(styles)(NewsBody)
