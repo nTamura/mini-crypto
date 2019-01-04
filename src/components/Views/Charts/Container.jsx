@@ -111,7 +111,7 @@ class Container extends Component {
     } = this.state
 
     return (
-      <div>
+      <>
         <Toolbar
           handleClick={e => { this.handleClick(e) }}
           handleClose={e => { this.handleClose(e) }}
@@ -139,7 +139,7 @@ class Container extends Component {
             />
           </>
         }
-      </div>
+      </>
     )
   }
 }
