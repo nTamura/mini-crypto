@@ -8,7 +8,6 @@ const styles = () => ({
   root: {
     display: 'flex',
     justifyContent: 'center',
-    paddingTop: 32
   },
   buttonBase: {
     display: 'block'
