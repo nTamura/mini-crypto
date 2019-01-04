@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { withStyles } from '@material-ui/core/styles'
-import { Typography, ButtonBase } from '@material-ui/core'
+import { Button, Typography } from '@material-ui/core'
 import { ExpandMore } from '@material-ui/icons'
 
 const styles = () => ({
@@ -10,7 +10,9 @@ const styles = () => ({
     justifyContent: 'center',
   },
   buttonBase: {
-    display: 'block'
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center'
   },
   dimmed: {
     color: 'rgba(255,255,255,0.2)'
@@ -23,12 +25,14 @@ const styles = () => ({
 const ShowMore = ({ classes, showMore, rowsToDisplay }) => (
   <div className={classes.root}>
     { rowsToDisplay <= 99 ? (
-      <ButtonBase onClick={showMore} className={classes.buttonBase}>
-        <Typography component="button" variant="button">
-          show more
-        </Typography>
+      <Button
+        variant="text"
+        className={classes.buttonBase}
+        onClick={showMore}
+      >
+        show more
         <ExpandMore className={classes.icon} />
-      </ButtonBase>
+      </Button>
     ) : (
       <Typography variant="button" className={classes.dimmed}>
         no more to show

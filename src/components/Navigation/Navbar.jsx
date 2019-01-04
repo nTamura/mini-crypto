@@ -7,7 +7,7 @@ import GoBack from 'components/Common/GoBack'
 
 const styles = () => ({
   root: {
-    padding: 16,
+    padding: '16px 0',
     backgroundColor: '#34353F'
   },
   menuBar: {
@@ -97,7 +97,7 @@ class Navbar extends Component {
     const { drawer } = this.state
     return (
       <div className={classes.root}>
-        <div className={classes.menuBar}>
+        <div className={[classes.menuBar, 'container'].join(' ')}>
           <GoBack />
           <div className={classes.titleContainer}>
 

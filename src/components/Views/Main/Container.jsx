@@ -39,7 +39,6 @@ class Container extends Component {
     const date = new Date().toLocaleDateString('en-CA')
     const url = `https://newsapi.org/v2/everything?language=en&q=${query}&from=${date}&sortBy=popularity&apiKey=${API_KEY}`
 
-
     axios.get(url)
       .catch(error => {
         console.log(error)
