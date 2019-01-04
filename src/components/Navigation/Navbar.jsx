@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { withRouter, Link } from 'react-router-dom'
 import { SwipeableDrawer, Typography, IconButton, Divider } from '@material-ui/core'
 import { withStyles } from '@material-ui/core/styles'
-import { Menu as MenuIcon, Star, TrendingUp } from '@material-ui/icons'
+import { Menu as MenuIcon, Star, InsertChartOutlined, TrendingUp, Equalizer, Language } from '@material-ui/icons'
 import GoBack from 'components/Common/GoBack'
 
 const styles = () => ({
@@ -35,16 +35,34 @@ const styles = () => ({
     alignItems: 'center',
     padding: 16
   },
+  navLinkDisabled: {
+    color: 'rgba(255,255,255,0.2)',
+    display: 'flex',
+    alignItems: 'center',
+    padding: 16
+  },
   flex: {
     display: 'flex',
     flexDirection: 'column',
     height: '100%',
     justifyContent: 'space-between'
   },
-  icon: {
+  iconNews: {
     paddingRight: 14,
-    color: 'red'
-  }
+    color: '#d42f10'
+  },
+  iconGlobal: {
+    paddingRight: 14,
+    color: '#82B177'
+  },
+  iconFav: {
+    paddingRight: 14,
+    color: '#EF932D'
+  },
+  iconPort: {
+    paddingRight: 14,
+    color: '#CFEBE7'
+  },
 })
 
 class Navbar extends Component {
@@ -62,15 +80,15 @@ class Navbar extends Component {
   matchPath = path => {
     switch (path) {
       case '/':
-        return 'Crypto Charts'
+        return 'Crypto Tracker'
       case '/charts':
-        return 'Global Charts'
+        return 'Global Tracker'
       case '/favorites':
-        return 'Personal Charts'
+        return 'Personal Tracker'
       case '/portfolio':
         return 'Your Portfolio'
       default:
-        return 'Crypto Charts'
+        return 'Crypto Tracker'
     }
   }
 
@@ -122,22 +140,31 @@ class Navbar extends Component {
           >
             <div>
               <Typography
-                component={Link}
-                to="/"
                 variant="subtitle1"
                 className={classes.drawerTitle}
               >
                 React-Crypto App
               </Typography>
+
               <Divider />
+
+              <Typography
+                component={Link}
+                to="/"
+                variant="subtitle1"
+                className={classes.navLink}
+              >
+                <TrendingUp className={classes.iconNews} />
+                Trending News
+              </Typography>
               <Typography
                 component={Link}
                 to="/charts"
                 variant="subtitle1"
                 className={classes.navLink}
               >
-                <TrendingUp className={classes.icon} />
-                Global Charts
+                <Language className={classes.iconGlobal} />
+                Global Tracker
               </Typography>
               <Typography
                 component={Link}
@@ -145,16 +172,28 @@ class Navbar extends Component {
                 variant="subtitle1"
                 className={classes.navLink}
               >
-                <Star className={classes.icon} />
-                Personal Charts
+                <Star className={classes.iconFav} />
+                Personal Tracker
+              </Typography>
+              <Typography
+                // component={Link}
+                // to="/portfolio"
+                variant="subtitle1"
+                className={classes.navLinkDisabled}
+              >
+                <Equalizer className={classes.iconPort} />
+                Portfolio
               </Typography>
 
             </div>
             <Typography
-              variant="body2"
-              className={classes.navLink}
+              // component={Link}
+              // to="/about"
+              variant="caption"
+              align="right"
+              className={classes.navLinkDisabled}
             >
-              {/* Personal Charts */}
+              About
             </Typography>
 
           </div>

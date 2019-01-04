@@ -11,10 +11,6 @@ import CardContent from '@material-ui/core/CardContent'
 const styles = () => ({
   root: {
     width: '100%',
-    // overflowX: 'auto'
-  },
-  headerTitle: {
-    // padding: 12
   },
   titleContainer: {
     display: 'flex',
@@ -59,14 +55,13 @@ const NewsBody = ({
     <div className={classes.root}>
       <div className={classes.titleContainer}>
         <TrendingUp className={classes.icon} />
-        <Typography variant="h6" className={classes.headerTitle}>
+        <Typography variant="h6">
           Trending Crypto News
         </Typography>
       </div>
+
       <div className={classes.cardsList}>
-
         {newsData.slice(0, rowsToDisplay).map(article => (
-
           <Card className={classes.card}>
             <CardContent>
               <div className={classes.flex}>

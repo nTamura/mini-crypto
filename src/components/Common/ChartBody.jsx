@@ -8,7 +8,8 @@ import toCurrency from 'Helpers/toCurrency'
 const styles = () => ({
   root: {
     width: '100%',
-    overflowX: 'auto'
+    overflowX: 'auto',
+    marginBottom: 16
   },
   paper: {
     width: '100%',

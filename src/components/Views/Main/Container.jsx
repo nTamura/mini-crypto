@@ -36,7 +36,7 @@ class Container extends Component {
   getNews = () => {
     // const url = SOURCE + API_KEY
     const query = 'crypto OR cryptocurrency OR blockchain OR bitcoin OR ethereum OR litecoin OR ripple OR btc OR ltc OR xrp OR eth OR bch OR EOS'
-    const date = '2019-01-02'
+    const date = new Date().toLocaleDateString('en-CA')
     const url = `https://newsapi.org/v2/everything?language=en&q=${query}&from=${date}&sortBy=popularity&apiKey=${API_KEY}`
 
 
