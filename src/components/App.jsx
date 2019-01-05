@@ -9,6 +9,7 @@ import Charts from 'components/Views/Charts'
 import Favorites from 'components/Views/Favorites'
 import NotFound from 'components/Views/NotFound'
 
+
 const styles = () => ({
   app: {
     flex: 1,
@@ -36,5 +37,6 @@ const App = ({ classes }) => (
     <Footer />
   </>
 )
+
 
 export default withStyles(styles)(App)
