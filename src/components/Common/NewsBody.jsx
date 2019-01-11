@@ -27,6 +27,7 @@ const styles = () => ({
   previewImg: {
     width: '100%',
     maxHeight: 160,
+    padding: '16px 0',
     objectFit: 'cover'
   },
   cardsList: {
@@ -44,10 +45,7 @@ const styles = () => ({
   }
 })
 
-const NewsBody = ({
-  currency, classes, newsData, filteredChart, userInput,
-  favoritedItem, toggleFavorite, rowsToDisplay
-}) => (
+const NewsBody = ({ classes, newsData, rowsToDisplay }) => (
   <div className={classes.root}>
     <div className={classes.titleContainer}>
       <TrendingUp className={classes.icon} />
@@ -57,11 +55,11 @@ const NewsBody = ({
     </div>
 
     <div className={classes.cardsList}>
-      {newsData.slice(0, rowsToDisplay).map(article => (
-        <Card className={classes.card}>
+      {newsData.slice(0, rowsToDisplay).map((article, i) => (
+        <Card key={i} className={classes.card}>
           <CardContent>
             <div className={classes.flex}>
-              <Typography variant="caption" gutterBottom>
+              <Typography variant="caption">
                 {article.source.name}
               </Typography>
               <Typography variant="caption" color="textSecondary">
@@ -73,19 +71,23 @@ const NewsBody = ({
               className={classes.previewImg}
               alt="article preview"
             />
-            <Typography variant="h6" className={classes.title} gutterBottom>
+            <Typography variant="h6" className={classes.title} paragraph>
               {article.title}
             </Typography>
-            <Typography component="p">
+            <Typography>
               {article.description}
             </Typography>
-
           </CardContent>
+
           <CardActions>
-            <Button size="medium" component="a" href={article.url}>
+            <Button
+              component="a"
+              target="_blank"
+              rel="noopener noreferrer"
+              href={article.url}
+            >
               <LinkIcon className={classes.linkIcon} />
-              Read more
-              {/* open new tab */}
+              Continue Reading
             </Button>
           </CardActions>
         </Card>
