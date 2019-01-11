@@ -4,6 +4,7 @@ import { SwipeableDrawer, Typography, IconButton, Divider } from '@material-ui/c
 import { withStyles } from '@material-ui/core/styles'
 import { Menu as MenuIcon, Star, TrendingUp, Equalizer, Language } from '@material-ui/icons'
 import GoBack from 'components/Common/GoBack'
+import logo from 'assets/icon.png'
 
 const styles = () => ({
   root: {
@@ -23,6 +24,10 @@ const styles = () => ({
   title: {
     paddingLeft: 12,
     textDecoration: 'none'
+  },
+  drawerTitleContainer: {
+    display: 'flex',
+    alignItems: 'center'
   },
   drawerTitle: {
     textDecoration: 'none',
@@ -46,6 +51,10 @@ const styles = () => ({
     flexDirection: 'column',
     height: '100%',
     justifyContent: 'space-between'
+  },
+  logo: {
+    width: 60,
+    height: '100%'
   },
   iconNews: {
     paddingRight: 14,
@@ -107,18 +116,9 @@ class Navbar extends Component {
             >
               {this.matchPath(location.pathname)}
             </Typography>
-            <Typography
-              variant="caption"
-            >
-              {/*
-                once you select a coin, show coin name here
-              */}
-            </Typography>
           </div>
 
           <IconButton
-            // aria-haspopup="true"
-            // aria-owns={anchorEl ? 'hamburgerMenu' : null}
             className={classes.navHamburger}
             onClick={this.toggleDrawer(true)}
           >
@@ -139,9 +139,12 @@ class Navbar extends Component {
             className={classes.flex}
           >
             <div>
-              <Typography variant="subtitle1" className={classes.drawerTitle}>
-                Mini-Crypto
-              </Typography>
+              <div className={classes.drawerTitleContainer}>
+                <img src={logo} className={classes.logo} alt="logo" />
+                <Typography variant="subtitle1" className={classes.drawerTitle}>
+                  Mini-Crypto
+                </Typography>
+              </div>
 
               <Divider />
 
@@ -184,11 +187,11 @@ class Navbar extends Component {
 
             </div>
             <Typography
-              // component={Link}
-              // to="/about"
+              component={Link}
+              to="/about"
               variant="caption"
               align="right"
-              className={classes.navLinkDisabled}
+              className={classes.navLink}
             >
               About
             </Typography>
