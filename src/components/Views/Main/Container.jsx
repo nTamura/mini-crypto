@@ -60,6 +60,7 @@ class Container extends Component {
             />
             <ShowMore
               showMore={this.showMore}
+              maxRows={newsData.length}
               rowsToDisplay={rowsToDisplay}
             />
           </>

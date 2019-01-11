@@ -22,9 +22,13 @@ const styles = () => ({
   }
 })
 
-const ShowMore = ({ classes, showMore, rowsToDisplay }) => (
+const ShowMore = ({ classes, showMore, rowsToDisplay, maxRows }) => (
   <div className={classes.root}>
-    { rowsToDisplay <= 99 ? (
+    { rowsToDisplay >= maxRows ? (
+      <Typography variant="button" className={classes.dimmed}>
+        no more to show
+      </Typography>
+    ) : (
       <Button
         variant="text"
         className={classes.buttonBase}
@@ -33,10 +37,6 @@ const ShowMore = ({ classes, showMore, rowsToDisplay }) => (
         show more
         <ExpandMore className={classes.icon} />
       </Button>
-    ) : (
-      <Typography variant="button" className={classes.dimmed}>
-        no more to show
-      </Typography>
     )}
   </div>
 )
@@ -45,6 +45,7 @@ ShowMore.propTypes = {
   classes: PropTypes.object.isRequired,
   showMore: PropTypes.func.isRequired,
   rowsToDisplay: PropTypes.number.isRequired,
+  maxRows: PropTypes.number.isRequired,
 }
 
 export default withStyles(styles)(ShowMore)

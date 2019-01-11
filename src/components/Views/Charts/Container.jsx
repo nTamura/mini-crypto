@@ -136,6 +136,7 @@ class Container extends Component {
             <ShowMore
               showMore={this.showMore}
               rowsToDisplay={rowsToDisplay}
+              maxRows={chartData.length}
             />
           </>
         }
