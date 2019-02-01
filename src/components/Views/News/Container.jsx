@@ -48,7 +48,6 @@ class Container extends Component {
         console.log(error)
       })
       .then(res => {
-        // console.log(res.data.articles)
         this.setState({ newsData: res.data.articles }, () => {
           this.setState({ isLoading: false })
         })
