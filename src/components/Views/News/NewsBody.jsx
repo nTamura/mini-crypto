@@ -1,6 +1,5 @@
 import React from 'react'
 import { withStyles } from '@material-ui/core/styles'
-import ExtLink from 'components/Common/ExtLink'
 import { Link as LinkIcon, TrendingUp } from '@material-ui/icons'
 import toDate from 'Helpers/toDate'
 import {
