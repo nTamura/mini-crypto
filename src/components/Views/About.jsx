@@ -18,7 +18,7 @@ const styles = {
     paddingRight: 10,
   },
   link: {
-    color: '#EE6352',
+    color: '#FFFFFF',
   },
 }
 
@@ -34,9 +34,12 @@ const About = ({ classes }) => (
         <Typography variant="h6" className={classes.title}>
           Mini-Crypto
         </Typography>
-        <Typography color="textSecondary" paragraph>
+        <Typography color="textSecondary" variant="caption">
           Version alpha-0.1
         </Typography>
+        <ExtLink href="https://github.com/nTamura/mini-crypto" paragraph>
+          Github Repo
+        </ExtLink>
 
         <Typography>Material UI Library</Typography>
         <ExtLink url="https://material-ui.com/" paragraph>
@@ -54,13 +57,8 @@ const About = ({ classes }) => (
         </ExtLink>
 
         <Typography>Cryptocoins Icons Repository</Typography>
-        <ExtLink url="https://github.com/allienworks/cryptocoins" paragraph>
+        <ExtLink url="https://github.com/allienworks/cryptocoins" gutterBottom>
           Cryptocoins Icons
-        </ExtLink>
-
-        <Typography>Mini-Crypto Repository</Typography>
-        <ExtLink url="https://github.com/nTamura/mini-crypto" paragraph>
-          Source code
         </ExtLink>
       </CardContent>
     </Card>

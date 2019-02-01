@@ -51,6 +51,11 @@ const styles = () => ({
     alignItems: 'center',
     padding: 16,
   },
+  navLinkMuted: {
+    color: 'rgba(255,255,255,0.4)',
+    textDecoration: 'none',
+    padding: 16,
+  },
   flex: {
     display: 'flex',
     flexDirection: 'column',
@@ -94,15 +99,15 @@ class Navbar extends Component {
   matchPath = path => {
     switch (path) {
       case '/':
-        return 'Mini-Crypto'
+        return <img src={logo} style={{ width: 48 }} alt="logo" />
       case '/charts':
-        return 'Global Tracker'
+        return <Typography variant="h6">Global Tracker</Typography>
       case '/favorites':
-        return 'Personal Tracker'
+        return <Typography variant="h6">Personal Tracker</Typography>
       case '/portfolio':
-        return 'Portfolio'
+        return <Typography variant="h6">Portfolio</Typography>
       default:
-        return 'Mini-Crypto'
+        return <img src={logo} style={{ width: 48 }} alt="logo" />
     }
   }
 
@@ -114,9 +119,7 @@ class Navbar extends Component {
         <div className={[classes.menuBar, 'container'].join(' ')}>
           <GoBack />
           <div className={classes.titleContainer}>
-            <Typography variant="h6" className={classes.title}>
-              {this.matchPath(location.pathname)}
-            </Typography>
+            {this.matchPath(location.pathname)}
           </div>
 
           <IconButton
@@ -191,7 +194,7 @@ class Navbar extends Component {
               to="/about"
               variant="caption"
               align="right"
-              className={classes.navLink}
+              className={classes.navLinkMuted}
             >
               About
             </Typography>
