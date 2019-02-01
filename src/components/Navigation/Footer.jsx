@@ -25,7 +25,7 @@ const Navbar = ({ classes }) => (
   <div className={classes.root}>
     <img src={gh} className={classes.icon} alt="github" />
     <ExtLink
-      href="https://github.com/nTamura/mini-crypto"
+      url="https://github.com/nTamura/mini-crypto"
       variant="caption"
       className={classes.text}
     >
