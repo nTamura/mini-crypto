@@ -1,76 +1,81 @@
 import React, { Component } from 'react'
 import { withRouter, Link } from 'react-router-dom'
-import { SwipeableDrawer, Typography, IconButton, Divider } from '@material-ui/core'
 import { withStyles } from '@material-ui/core/styles'
-import { Menu as MenuIcon, Star, TrendingUp, Equalizer, Language } from '@material-ui/icons'
+import {
+  SwipeableDrawer,
+  Typography,
+  IconButton,
+  Divider,
+} from '@material-ui/core'
+import {
+  Menu as MenuIcon,
+  Star,
+  TrendingUp,
+  Equalizer,
+  Language,
+} from '@material-ui/icons'
 import GoBack from 'components/Common/GoBack'
 import logo from 'assets/icon.png'
 
 const styles = () => ({
   root: {
     padding: '16px 0',
-    backgroundColor: '#34353F'
+    backgroundColor: '#34353F',
   },
   menuBar: {
     display: 'flex',
     alignItems: 'center',
-    justifyContent: 'space-between'
+    justifyContent: 'space-between',
   },
   titleContainer: {
     display: 'flex',
     flexDirection: 'column',
-    textAlign: 'center'
+    textAlign: 'center',
   },
   title: {
     paddingLeft: 12,
-    textDecoration: 'none'
+    textDecoration: 'none',
   },
   drawerTitleContainer: {
     display: 'flex',
-    alignItems: 'center'
+    alignItems: 'center',
   },
   drawerTitle: {
     textDecoration: 'none',
     textAlign: 'center',
-    padding: 16
+    padding: 16,
   },
   navLink: {
     textDecoration: 'none',
     display: 'flex',
     alignItems: 'center',
-    padding: 16
-  },
-  navLinkDisabled: {
-    color: 'rgba(255,255,255,0.2)',
-    display: 'flex',
-    alignItems: 'center',
-    padding: 16
+    padding: 16,
   },
   flex: {
     display: 'flex',
     flexDirection: 'column',
     height: '100%',
-    justifyContent: 'space-between'
+    justifyContent: 'space-between',
   },
   logo: {
     width: 60,
-    height: '100%'
+    height: '100%',
   },
   iconNews: {
     paddingRight: 14,
-    color: '#d42f10'
+    color: '#d42f10',
   },
   iconGlobal: {
     paddingRight: 14,
-    color: '#82B177'
+    color: '#82B177',
   },
   iconFav: {
     paddingRight: 14,
-    color: '#EF932D'
+    color: '#EF932D',
   },
   iconPort: {
     paddingRight: 14,
-    color: '#CFEBE7'
+    color: '#CFEBE7',
   },
 })
 
@@ -78,7 +83,7 @@ class Navbar extends Component {
   constructor() {
     super()
     this.state = {
-      drawer: false
+      drawer: false,
     }
   }
 
@@ -89,15 +94,15 @@ class Navbar extends Component {
   matchPath = path => {
     switch (path) {
       case '/':
-        return 'Crypto Tracker'
+        return 'Mini-Crypto'
       case '/charts':
         return 'Global Tracker'
       case '/favorites':
         return 'Personal Tracker'
       case '/portfolio':
-        return 'Your Portfolio'
+        return 'Portfolio'
       default:
-        return 'Crypto Tracker'
+        return 'Mini-Crypto'
     }
   }
 
@@ -109,11 +114,7 @@ class Navbar extends Component {
         <div className={[classes.menuBar, 'container'].join(' ')}>
           <GoBack />
           <div className={classes.titleContainer}>
-
-            <Typography
-              variant="h6"
-              className={classes.title}
-            >
+            <Typography variant="h6" className={classes.title}>
               {this.matchPath(location.pathname)}
             </Typography>
           </div>
@@ -176,15 +177,14 @@ class Navbar extends Component {
                 Personal Tracker
               </Typography>
               <Typography
-                // component={Link}
-                // to="/portfolio"
+                component={Link}
+                to="/portfolio"
                 variant="subtitle1"
-                className={classes.navLinkDisabled}
+                className={classes.navLink}
               >
                 <Equalizer className={classes.iconPort} />
                 Portfolio
               </Typography>
-
             </div>
             <Typography
               component={Link}
@@ -195,7 +195,6 @@ class Navbar extends Component {
             >
               About
             </Typography>
-
           </div>
         </SwipeableDrawer>
       </div>

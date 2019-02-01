@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import axios from 'axios'
-import NewsBody from 'components/Common/NewsBody'
+import NewsBody from 'components/Views/News/NewsBody'
 import Loading from 'components/Common/Loading'
 import ShowMore from 'components/Common/ShowMore'
 

@@ -1,6 +1,6 @@
 # Mini-Crypto
 
-Mini-Crypto is a mini crypto tracker designed to be used on your mobile device for a quick overview of your favorite coins.
+Mini-Crypto is a mini crypto tracker designed to be used on your mobile device for a quick overview of your favorite coins. Just open the app and start using immediately - no signup required.
 
 ### Features
 

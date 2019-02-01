@@ -3,9 +3,10 @@ import { Route, Switch } from 'react-router-dom'
 import { withStyles } from '@material-ui/core/styles'
 import Navbar from 'components/Navigation/Navbar'
 import Footer from 'components/Navigation/Footer'
-import Main from 'components/Views/Main'
+import News from 'components/Views/News'
 import About from 'components/Views/About'
 import Charts from 'components/Views/Charts'
+import Portfolio from 'components/Views/Portfolio'
 import Favorites from 'components/Views/Favorites'
 import NotFound from 'components/Views/NotFound'
 
@@ -25,10 +26,11 @@ const App = ({ classes }) => (
     <div id="App" className={classes.app}>
       <div className={[classes.root, 'container'].join(' ')}>
         <Switch>
-          <Route exact path="/" component={Main} />
+          <Route exact path="/" component={News} />
           <Route exact path="/charts" component={Charts} />
           <Route exact path="/favorites" component={Favorites} />
           <Route exact path="/about" component={About} />
+          <Route exact path="/portfolio" component={Portfolio} />
           <Route component={NotFound} />
         </Switch>
       </div>
