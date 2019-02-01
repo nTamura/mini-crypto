@@ -11,12 +11,8 @@ class Container extends Component {
   constructor(props) {
     super(props)
 
-    const storageFavorites = JSON.parse(
-      localStorage.getItem('favorites')
-    )
-    const storageCurrency = JSON.parse(
-      localStorage.getItem('currency')
-    )
+    const storageFavorites = JSON.parse(localStorage.getItem('favorites'))
+    const storageCurrency = JSON.parse(localStorage.getItem('currency'))
 
     this.state = {
       isLoading: true,
@@ -26,13 +22,15 @@ class Container extends Component {
       filteredChart: [],
       favorites: storageFavorites || [],
       anchorEl: null,
-      currency: storageCurrency || 'usd'
+      currency: storageCurrency || 'usd',
     }
   }
 
   componentDidMount() {
     this.getChart(url)
-    setInterval(() => { this.getChart(url) }, 180000)
+    setInterval(() => {
+      this.getChart(url)
+    }, 180000)
   }
 
   handleClick = e => {
@@ -47,14 +45,14 @@ class Container extends Component {
     const { chartData } = this.state
     const keyword = e.target.value.toLowerCase()
 
-    const filteredChart = Object.values(chartData)
-      .filter(result => (
-        result.name.toLowerCase().includes(keyword)
-        || result.symbol.toLowerCase().includes(keyword)
-      ))
+    const filteredChart = Object.values(chartData).filter(
+      result =>
+        result.name.toLowerCase().includes(keyword) ||
+        result.symbol.toLowerCase().includes(keyword)
+    )
     this.setState({
       filteredChart,
-      userInput: keyword
+      userInput: keyword,
     })
   }
 
@@ -89,9 +87,9 @@ class Container extends Component {
   getChart = api => {
     const { favorites } = this.state
     axios.get(api).then(res => {
-      const favoritesList = res.data.filter(coin => (
+      const favoritesList = res.data.filter(coin =>
         favorites.includes(coin.symbol)
-      ))
+      )
       this.setState({ personalChart: favoritesList }, () => {
         this.setState({ isLoading: false })
       })
@@ -100,23 +98,37 @@ class Container extends Component {
 
   render() {
     const {
-      isLoading, personalChart, anchorEl, currency, filteredChart, userInput
+      isLoading,
+      personalChart,
+      anchorEl,
+      currency,
+      filteredChart,
+      userInput,
     } = this.state
 
     return (
       <div>
         <Toolbar
-          handleClick={e => { this.handleClick(e) }}
-          handleClose={e => { this.handleClose(e) }}
-          selectCurrency={e => { this.selectCurrency(e) }}
-          handleSearch={e => { this.handleSearch(e) }}
+          handleClick={e => {
+            this.handleClick(e)
+          }}
+          handleClose={e => {
+            this.handleClose(e)
+          }}
+          selectCurrency={e => {
+            this.selectCurrency(e)
+          }}
+          handleSearch={e => {
+            this.handleSearch(e)
+          }}
           anchorEl={anchorEl}
           currency={currency}
           options={options}
         />
-        { isLoading
-          ? <Loading />
-          : <ChartBody
+        {isLoading ? (
+          <Loading />
+        ) : (
+          <ChartBody
             chartData={personalChart}
             filteredChart={filteredChart}
             userInput={userInput}
@@ -124,7 +136,7 @@ class Container extends Component {
             favoritedItem={this.favoritedItem}
             toggleFavorite={this.toggleFavorite}
           />
-        }
+        )}
       </div>
     )
   }

@@ -9,15 +9,14 @@ import Charts from 'components/Views/Charts'
 import Favorites from 'components/Views/Favorites'
 import NotFound from 'components/Views/NotFound'
 
-
 const styles = () => ({
   app: {
     flex: 1,
-    background: 'linear-gradient(to right bottom, #484B5B, #34353F)'
+    background: 'linear-gradient(to right bottom, #484B5B, #34353F)',
   },
   root: {
     paddingBottom: 32,
-  }
+  },
 })
 
 const App = ({ classes }) => (
@@ -37,6 +36,5 @@ const App = ({ classes }) => (
     <Footer />
   </>
 )
-
 
 export default withStyles(styles)(App)

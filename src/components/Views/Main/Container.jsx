@@ -19,23 +19,27 @@ class Container extends Component {
 
   componentDidMount() {
     this.getNews()
-    setInterval(() => { this.getNews() }, 600000)
+    setInterval(() => {
+      this.getNews()
+    }, 600000)
     // 10 minute fetch intervals
   }
 
   showMore = () => {
     let { rowsToDisplay: cards } = this.state
     this.setState({
-      rowsToDisplay: cards += 5
+      rowsToDisplay: (cards += 5),
     })
   }
 
   getNews = () => {
-    const query = 'crypto OR cryptocurrency OR blockchain OR bitcoin OR ethereum OR litecoin OR ripple OR btc OR ltc OR xrp OR eth OR bch OR EOS'
+    const query =
+      'crypto OR cryptocurrency OR blockchain OR bitcoin OR ethereum OR litecoin OR ripple OR btc OR ltc OR xrp OR eth OR bch OR EOS'
     const date = new Date().toLocaleDateString('en-CA')
     const url = `https://newsapi.org/v2/everything?language=en&q=${query}&from=${date}&sortBy=popularity&apiKey=${API_KEY}`
 
-    axios.get(url)
+    axios
+      .get(url)
       .catch(error => {
         console.log(error)
       })
@@ -51,20 +55,18 @@ class Container extends Component {
     const { isLoading, newsData, rowsToDisplay } = this.state
     return (
       <>
-        { isLoading
-          ? <Loading />
-          : <>
-            <NewsBody
-              newsData={newsData}
-              rowsToDisplay={rowsToDisplay}
-            />
+        {isLoading ? (
+          <Loading />
+        ) : (
+          <>
+            <NewsBody newsData={newsData} rowsToDisplay={rowsToDisplay} />
             <ShowMore
               showMore={this.showMore}
               maxRows={newsData.length}
               rowsToDisplay={rowsToDisplay}
             />
           </>
-        }
+        )}
       </>
     )
   }
