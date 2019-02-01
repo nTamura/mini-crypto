@@ -5,7 +5,8 @@ import Loading from 'components/Common/Loading'
 import ShowMore from 'components/Common/ShowMore'
 
 const API_KEY = process.env.REACT_APP_NEWS_API_KEY
-// const SOURCE = 'https://newsapi.org/v2/top-headlines?sources=crypto-coins-news&apiKey='
+const SOURCE =
+  'https://newsapi.org/v2/top-headlines?sources=crypto-coins-news&apiKey='
 
 class Container extends Component {
   constructor(props) {
@@ -36,7 +37,10 @@ class Container extends Component {
     const query =
       'crypto OR cryptocurrency OR blockchain OR bitcoin OR ethereum OR litecoin OR ripple OR btc OR ltc OR xrp OR eth OR bch OR EOS'
     const date = new Date().toLocaleDateString('en-CA')
-    const url = `https://newsapi.org/v2/everything?language=en&q=${query}&from=${date}&sortBy=popularity&apiKey=${API_KEY}`
+    const url = `${SOURCE}${API_KEY}`
+    // const url = `https://newsapi.org/v2/everything?language=en&q=${query}&from=${date}&sortBy=popularity&apiKey=${API_KEY}`
+
+    // Above queries pick up too much junk articles, have to use from one source for now until better API found or implement scraping
 
     axios
       .get(url)
