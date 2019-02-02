@@ -6,8 +6,8 @@ import { withStyles } from '@material-ui/core/styles'
 const styles = () => ({
   link: {
     textDecoration: 'none',
-    color: '#d42f10'
-  }
+    color: '#d42f10',
+  },
 })
 
 const ExtLink = ({ classes, url, children, ...rest }) => (

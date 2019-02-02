@@ -6,17 +6,32 @@ import 'cryptocoins-icons/webfont/cryptocoins-colors.css'
 
 const styles = () => ({
   icon: {
-    paddingRight: 8
+    paddingRight: 8,
+  },
+  large: {
+    fontSize: 28,
   },
 })
 
-const CoinSymbol = ({ classes, symbol }) => (
-  <i className={[classes.icon, symbol, 'cc'].join(' ')} />
+const CoinSymbol = ({ classes, symbol, large }) => (
+  <i
+    className={[
+      classes.icon,
+      symbol,
+      'cc',
+      `${large ? classes.large : null}`,
+    ].join(' ')}
+  />
 )
 
 CoinSymbol.propTypes = {
   classes: PropTypes.object.isRequired,
   symbol: PropTypes.string.isRequired,
+  large: PropTypes.bool,
+}
+
+CoinSymbol.defaultProps = {
+  large: false,
 }
 
 export default withStyles(styles)(CoinSymbol)
