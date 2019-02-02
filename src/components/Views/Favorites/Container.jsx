@@ -123,7 +123,6 @@ class Container extends Component {
           }}
           anchorEl={anchorEl}
           currency={currency}
-          options={options}
         />
         {isLoading ? (
           <Loading />

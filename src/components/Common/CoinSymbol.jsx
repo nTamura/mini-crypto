@@ -5,7 +5,7 @@ import 'cryptocoins-icons/webfont/cryptocoins.css'
 import 'cryptocoins-icons/webfont/cryptocoins-colors.css'
 
 const styles = () => ({
-  icon: {
+  small: {
     paddingRight: 8,
   },
   large: {
@@ -15,12 +15,9 @@ const styles = () => ({
 
 const CoinSymbol = ({ classes, symbol, large }) => (
   <i
-    className={[
-      classes.icon,
-      symbol,
-      'cc',
-      `${large ? classes.large : null}`,
-    ].join(' ')}
+    className={[symbol, 'cc', `${large ? classes.large : classes.small}`].join(
+      ' '
+    )}
   />
 )
 

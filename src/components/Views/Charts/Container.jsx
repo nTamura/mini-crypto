@@ -5,19 +5,14 @@ import ChartBody from 'components/Common/ChartBody'
 import Loading from 'components/Common/Loading'
 import ShowMore from 'components/Common/ShowMore'
 
-const options = ['usd', 'cad']
 const url = 'https://api.coinmarketcap.com/v1/ticker/?convert=CAD&limit=100'
 
 class Container extends Component {
   constructor(props) {
     super(props)
 
-    const storageFavorites = JSON.parse(
-      localStorage.getItem('favorites')
-    )
-    const storageCurrency = JSON.parse(
-      localStorage.getItem('currency')
-    )
+    const storageFavorites = JSON.parse(localStorage.getItem('favorites'))
+    const storageCurrency = JSON.parse(localStorage.getItem('currency'))
 
     this.state = {
       isLoading: true,
@@ -27,13 +22,15 @@ class Container extends Component {
       rowsToDisplay: 25,
       favorites: storageFavorites || [],
       anchorEl: null,
-      currency: storageCurrency || 'usd'
+      currency: storageCurrency || 'usd',
     }
   }
 
   componentDidMount() {
     this.getChart(url)
-    setInterval(() => { this.getChart(url) }, 180000)
+    setInterval(() => {
+      this.getChart(url)
+    }, 180000)
     // TODO: add last updated at __
   }
 
@@ -49,21 +46,21 @@ class Container extends Component {
     const { chartData } = this.state
     const keyword = e.target.value.toLowerCase()
 
-    const filteredChart = Object.values(chartData)
-      .filter(result => (
-        result.name.toLowerCase().includes(keyword)
-        || result.symbol.toLowerCase().includes(keyword)
-      ))
+    const filteredChart = Object.values(chartData).filter(
+      result =>
+        result.name.toLowerCase().includes(keyword) ||
+        result.symbol.toLowerCase().includes(keyword)
+    )
     this.setState({
       filteredChart,
-      userInput: keyword
+      userInput: keyword,
     })
   }
 
   showMore = () => {
     let { rowsToDisplay: rows } = this.state
     this.setState({
-      rowsToDisplay: rows += 25
+      rowsToDisplay: (rows += 25),
     })
   }
 
@@ -106,24 +103,37 @@ class Container extends Component {
 
   render() {
     const {
-      isLoading, chartData, filteredChart, anchorEl, currency,
-      userInput, rowsToDisplay
+      isLoading,
+      chartData,
+      filteredChart,
+      anchorEl,
+      currency,
+      userInput,
+      rowsToDisplay,
     } = this.state
 
     return (
       <>
         <Toolbar
-          handleClick={e => { this.handleClick(e) }}
-          handleClose={e => { this.handleClose(e) }}
-          selectCurrency={e => { this.selectCurrency(e) }}
-          handleSearch={e => { this.handleSearch(e) }}
+          handleClick={e => {
+            this.handleClick(e)
+          }}
+          handleClose={e => {
+            this.handleClose(e)
+          }}
+          selectCurrency={e => {
+            this.selectCurrency(e)
+          }}
+          handleSearch={e => {
+            this.handleSearch(e)
+          }}
           anchorEl={anchorEl}
           currency={currency}
-          options={options}
         />
-        { isLoading
-          ? <Loading />
-          : <>
+        {isLoading ? (
+          <Loading />
+        ) : (
+          <>
             <ChartBody
               chartData={chartData}
               filteredChart={filteredChart}
@@ -139,7 +149,7 @@ class Container extends Component {
               maxRows={chartData.length}
             />
           </>
-        }
+        )}
       </>
     )
   }
