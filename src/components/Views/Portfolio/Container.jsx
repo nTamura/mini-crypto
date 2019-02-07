@@ -5,7 +5,17 @@ import WealthChart from 'components/Views/Portfolio/WealthChart'
 import Loading from 'components/Common/Loading'
 import Toolbar from 'components/Common/Toolbar'
 
-const url = 'https://api.coinmarketcap.com/v1/ticker/?convert=CAD&limit=5'
+// const url = 'https://api.coinmarketcap.com/v1/ticker/?convert=CAD&limit=5'
+
+const url =
+  'https://api.coinmarketcap.com/v1/cryptocurrency/quotes/latest?symbol=BTC,ETH,XRP,BCH,EOS,LTC,XLM'
+// const url =
+//   'https://pro-api.coinmarketcap.com/v1/cryptocurrency/listings/latest?start=0&limit=5000&convert=USD'
+// const url = 'https://api.coinmarketcap.com/v1/cryptocurrency/info?id=1,2,10'
+
+const proxyurl = 'https://cors-anywhere.herokuapp.com/'
+
+const API_KEY = process.env.REACT_APP_COIN_API_KEY
 
 class Container extends Component {
   constructor(props) {
@@ -30,14 +40,28 @@ class Container extends Component {
     this.getWealth()
   }
 
-  getChart = api => {
-    axios.get(api).then(res => {
-      console.log(res.data)
-      this.setState({ chartData: res.data }, () => {
-        this.setState({ isLoading: false })
+  getChart = url => {
+    axios
+      .get(url, {
+        // mode: 'no-cors',
+        headers: {
+          // 'X-CMC_PRO_API_KEY': API_KEY,
+          // 'Access-Control-Allow-Origin': '*',
+          'Content-Type': 'application/json',
+        },
       })
-    })
+      .then(res => {
+        console.log(res.data)
+        this.setState({ chartData: res.data }, () => {
+          this.setState({ isLoading: false })
+        })
+      })
+      .catch(error => {
+        console.log(error)
+      })
   }
+
+  appendCoins = () => {}
 
   getWealth = () => {
     // calculate coins to match current price

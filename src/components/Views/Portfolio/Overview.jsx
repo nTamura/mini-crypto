@@ -17,6 +17,16 @@ const styles = () => ({
     paddingTop: 16,
     paddingBottom: 32,
   },
+  trackerContainer: {
+    display: 'flex',
+    width: '100%',
+    justifyContent: 'space-evenly',
+  },
+  trackerChild: {
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+  },
 })
 
 const Overview = ({ classes }) => {
@@ -25,7 +35,19 @@ const Overview = ({ classes }) => {
       <Typography variant="overline" color="textSecondary">
         Your personal balance
       </Typography>
-      <Typography variant="h4">$24,234.56</Typography>
+      <Typography variant="h4" gutterBottom>
+        $24,234.56
+      </Typography>
+      <div className={classes.trackerContainer}>
+        <div className={classes.trackerChild}>
+          <Typography variant="caption">Change(1d)</Typography>
+          <Typography variant="caption">15.4%</Typography>
+        </div>
+        <div className={classes.trackerChild}>
+          <Typography variant="caption">Change(7d)</Typography>
+          <Typography variant="caption">15.4%</Typography>
+        </div>
+      </div>
     </div>
   )
 }

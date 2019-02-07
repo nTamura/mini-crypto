@@ -53,7 +53,6 @@ const WealthChart = ({
   // } else {
   //   data = chartData
   // }
-
   return (
     <div className={classes.root}>
       <Paper className={classes.root}>
@@ -105,12 +104,14 @@ const WealthChart = ({
                       {coin.name}
                     </Typography>
                     <Typography variant="caption" color="textSecondary">
+                      {/* holdings match coin.symbol */}
                       13.241 {coin.symbol}
                     </Typography>
                   </TableCell>
-                  <TableCell padding="checkbox" align="right" noWrap>
+                  <TableCell padding="checkbox" align="right">
                     <Typography className={classes.digits}>
-                      {/* {toCurrency(eval(marketCap))} */}$1,131
+                      {eval(price) * 2}
+                      {/* calculate price x holdings amount */}
                     </Typography>
                   </TableCell>
                   <TableCell padding="checkbox" align="right">
