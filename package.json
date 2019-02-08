@@ -30,7 +30,6 @@
     "test": "NODE_PATH=src/ react-scripts test --env=jsdom",
     "eject": "NODE_PATH=src/ react-scripts eject"
   },
-  "proxy": "http://localhost:3000",
   "browserslist": [
     ">0.2%",
     "not dead",
