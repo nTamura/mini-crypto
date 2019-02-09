@@ -19,6 +19,13 @@ const styles = () => ({
     alignItems: 'center',
     padding: '14px 0',
   },
+  title: {
+    lineHeight: '1.5rem',
+  },
+  flex: {
+    display: 'flex',
+    justifyContent: 'space-between',
+  },
   icon: {
     paddingRight: 14,
     color: '#d42f10',
@@ -42,13 +49,6 @@ const styles = () => ({
   card: {
     marginBottom: 24,
   },
-  title: {
-    lineHeight: '1.5rem',
-  },
-  flex: {
-    display: 'flex',
-    justifyContent: 'space-between',
-  },
 })
 
 const NewsBody = ({ classes, newsData, rowsToDisplay }) => (
@@ -59,13 +59,15 @@ const NewsBody = ({ classes, newsData, rowsToDisplay }) => (
     </div>
 
     <div className={classes.cardsList}>
-      {newsData.slice(0, rowsToDisplay).map((article, i) => (
-        <Card key={i} className={classes.card}>
+      {newsData.slice(0, rowsToDisplay).map(article => (
+        <Card key={article.id} className={classes.card}>
           <CardContent>
             <div className={classes.flex}>
-              <Typography variant="caption">{article.source.name}</Typography>
+              <Typography variant="caption">
+                Source: {article.source.toUpperCase()}
+              </Typography>
               <Typography variant="caption" color="textSecondary">
-                {toDate(article.publishedAt)}
+                {toDate(article.published_on)}
               </Typography>
             </div>
             <a
@@ -75,7 +77,7 @@ const NewsBody = ({ classes, newsData, rowsToDisplay }) => (
               className={classes.link}
             >
               <img
-                src={article.urlToImage}
+                src={article.imageurl}
                 className={classes.previewImg}
                 alt="article preview"
               />
@@ -83,7 +85,11 @@ const NewsBody = ({ classes, newsData, rowsToDisplay }) => (
                 {article.title}
               </Typography>
             </a>
-            <Typography>{article.description}</Typography>
+            <Typography
+              dangerouslySetInnerHTML={{
+                __html: article.body.split('[&#8230;]', 1)[0].concat('...'),
+              }}
+            />
           </CardContent>
 
           <CardActions>

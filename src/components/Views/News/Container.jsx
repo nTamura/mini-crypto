@@ -4,9 +4,7 @@ import NewsBody from 'components/Views/News/NewsBody'
 import Loading from 'components/Common/Loading'
 import ShowMore from 'components/Common/ShowMore'
 
-const API_KEY = process.env.REACT_APP_NEWS_API_KEY
-const SOURCE =
-  'https://newsapi.org/v2/top-headlines?sources=crypto-coins-news&apiKey='
+const SOURCE = 'https://min-api.cryptocompare.com/data/v2/news/?lang=EN'
 
 class Container extends Component {
   constructor(props) {
@@ -14,16 +12,12 @@ class Container extends Component {
     this.state = {
       isLoading: true,
       newsData: [],
-      rowsToDisplay: 5,
+      rowsToDisplay: 10,
     }
   }
 
   componentDidMount() {
     this.getNews()
-    setInterval(() => {
-      this.getNews()
-    }, 600000)
-    // 10 minute fetch intervals
   }
 
   showMore = () => {
@@ -34,21 +28,13 @@ class Container extends Component {
   }
 
   getNews = () => {
-    const query =
-      'crypto OR cryptocurrency OR blockchain OR bitcoin OR ethereum OR litecoin OR ripple OR btc OR ltc OR xrp OR eth OR bch OR EOS'
-    const date = new Date().toLocaleDateString('en-CA')
-    const url = `${SOURCE}${API_KEY}`
-    // const url = `https://newsapi.org/v2/everything?language=en&q=${query}&from=${date}&sortBy=popularity&apiKey=${API_KEY}`
-
-    // Above queries pick up too much junk articles, have to use from one source for now until better API found or implement scraping
-
     axios
-      .get(url)
+      .get(SOURCE)
       .catch(error => {
         console.log(error)
       })
       .then(res => {
-        this.setState({ newsData: res.data.articles }, () => {
+        this.setState({ newsData: res.data.Data }, () => {
           this.setState({ isLoading: false })
         })
       })
