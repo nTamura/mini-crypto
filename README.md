@@ -40,6 +40,7 @@ git clone https://github.com/nTamura/mini-crypto.git
 - Click on individual coins to view more detail in accordion
 - Sort table by
 - 'Your portfolio' - add coins to view your portfolio worth
+- Add wallet address for automatic account balances
 
 <!-- fix
   !showMore if result.length, apply to search, favorites, etc

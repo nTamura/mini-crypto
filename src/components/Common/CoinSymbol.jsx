@@ -6,7 +6,8 @@ import 'cryptocoins-icons/webfont/cryptocoins-colors.css'
 
 const styles = () => ({
   small: {
-    paddingRight: 8,
+    // paddingRight: 8,
+    fontSize: 25,
   },
   large: {
     fontSize: 28,

@@ -5,7 +5,7 @@ import { withStyles } from '@material-ui/core/styles'
 import { AddCircleOutline, ArrowDropDown, Search } from '@material-ui/icons'
 import { Menu, MenuItem, InputBase, Typography } from '@material-ui/core'
 
-const options = ['usd', 'cad']
+const options = ['USD', 'CAD']
 
 const styles = () => ({
   root: {

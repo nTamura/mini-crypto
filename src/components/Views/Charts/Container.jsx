@@ -5,8 +5,9 @@ import ChartBody from 'components/Common/ChartBody'
 import Loading from 'components/Common/Loading'
 import ShowMore from 'components/Common/ShowMore'
 
-const url = 'https://api.coinmarketcap.com/v1/ticker/?convert=CAD&limit=100'
-
+const url = 'https://min-api.cryptocompare.com/data/top/mktcapfull?limit=10'
+// const url = 'https://api.coinmarketcap.com/v1/ticker/?convert=CAD&limit=100'
+const API_KEY = process.env.REACT_APP_CRYPTO_COMPARE_API_KEY
 class Container extends Component {
   constructor(props) {
     super(props)
@@ -22,7 +23,7 @@ class Container extends Component {
       rowsToDisplay: 25,
       favorites: storageFavorites || [],
       anchorEl: null,
-      currency: storageCurrency || 'usd',
+      currency: storageCurrency || 'USD',
     }
   }
 
@@ -34,6 +35,20 @@ class Container extends Component {
     // TODO: add last updated at __
   }
 
+  getChart = api => {
+    const { currency } = this.state
+    axios
+      .get(`${api}&tsym=${currency.toUpperCase()}`, {
+        authorization: API_KEY,
+      })
+      .then(res => {
+        this.setState({ chartData: res.data.Data }, () => {
+          console.log(this.state.chartData[0])
+          console.log(this.state.chartData[2])
+          this.setState({ isLoading: false })
+        })
+      })
+  }
   handleClick = e => {
     this.setState({ anchorEl: e.currentTarget })
   }
@@ -67,7 +82,7 @@ class Container extends Component {
   selectCurrency = e => {
     const currency = e.target.getAttribute('value')
     this.setState({ currency }, () => {
-      localStorage.setItem('currency', JSON.stringify(currency))
+      localStorage.setItem('currency', JSON.stringify(currency).toUpperCase())
       this.handleClose()
     })
   }
@@ -90,15 +105,6 @@ class Container extends Component {
         localStorage.setItem('favorites', JSON.stringify([...value]))
       })
     }
-  }
-
-  getChart = api => {
-    axios.get(api).then(res => {
-      console.log(res.data)
-      this.setState({ chartData: res.data }, () => {
-        this.setState({ isLoading: false })
-      })
-    })
   }
 
   render() {
