@@ -4,8 +4,8 @@ import Toolbar from 'components/Common/Toolbar'
 import axios from 'axios'
 import Loading from 'components/Common/Loading'
 
-const options = ['usd', 'cad']
-const url = 'https://api.coinmarketcap.com/v1/ticker/?convert=CAD&limit=100'
+const url = 'https://min-api.cryptocompare.com/data/top/mktcapfull?limit=100'
+const API_KEY = process.env.REACT_APP_CRYPTO_COMPARE_API_KEY
 
 class Container extends Component {
   constructor(props) {
@@ -22,7 +22,7 @@ class Container extends Component {
       filteredChart: [],
       favorites: storageFavorites || [],
       anchorEl: null,
-      currency: storageCurrency || 'usd',
+      currency: storageCurrency || 'USD',
     }
   }
 
@@ -31,6 +31,22 @@ class Container extends Component {
     setInterval(() => {
       this.getChart(url)
     }, 180000)
+  }
+
+  getChart = api => {
+    const { favorites, currency } = this.state
+    axios
+      .get(`${api}&tsym=${currency.toUpperCase()}`, {
+        authorization: API_KEY,
+      })
+      .then(res => {
+        const favoritesList = res.data.Data.filter(coin =>
+          favorites.includes(coin.CoinInfo.Name)
+        )
+        this.setState({ personalChart: favoritesList }, () => {
+          this.setState({ isLoading: false })
+        })
+      })
   }
 
   handleClick = e => {
@@ -82,18 +98,6 @@ class Container extends Component {
         localStorage.setItem('favorites', JSON.stringify([...value]))
       })
     }
-  }
-
-  getChart = api => {
-    const { favorites } = this.state
-    axios.get(api).then(res => {
-      const favoritesList = res.data.filter(coin =>
-        favorites.includes(coin.symbol)
-      )
-      this.setState({ personalChart: favoritesList }, () => {
-        this.setState({ isLoading: false })
-      })
-    })
   }
 
   render() {

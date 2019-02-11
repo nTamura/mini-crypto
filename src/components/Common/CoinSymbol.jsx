@@ -6,11 +6,13 @@ import 'cryptocoins-icons/webfont/cryptocoins-colors.css'
 
 const styles = () => ({
   small: {
-    // paddingRight: 8,
     fontSize: 25,
   },
   large: {
     fontSize: 28,
+  },
+  cc: {
+    // backgroundImage: 'url(https://image.flaticon.com/icons/svg/8/8235.svg)',
   },
 })
 

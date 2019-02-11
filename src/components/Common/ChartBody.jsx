@@ -12,6 +12,7 @@ import {
 import { Star, StarBorder } from '@material-ui/icons'
 import CoinSymbol from 'components/Common/CoinSymbol'
 import toCurrency from 'Helpers/toCurrency'
+import maxChar from 'Helpers/maxChar'
 
 const styles = () => ({
   root: {
@@ -118,16 +119,16 @@ const ChartBody = ({
                   <TableCell padding="none" align="center">
                     <CoinSymbol symbol={coin.CoinInfo.Name} />
                   </TableCell>
-                  <TableCell padding="checkbox" component="th" scope="row">
+                  <TableCell style={{ padding: '0px 0px 0px 12px' }}>
                     <Typography variant="body1">
                       {coin.CoinInfo.Name}
                     </Typography>
                     <Typography variant="caption" noWrap>
-                      {coin.CoinInfo.FullName}
+                      {maxChar(coin.CoinInfo.FullName)}
                     </Typography>
                   </TableCell>
                   <TableCell padding="checkbox" align="right">
-                    <Typography noWrap className={classes.digits}>
+                    <Typography className={classes.digits}>
                       {toCurrency(eval(price))}
                     </Typography>
                   </TableCell>
