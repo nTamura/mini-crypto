@@ -18,13 +18,11 @@ const styles = () => ({
     width: '100%',
     overflowX: 'auto',
     marginBottom: 16,
+    paddingBottom: 16,
   },
   paper: {
     width: '100%',
     overflowX: 'auto',
-  },
-  cellOverflow: {
-    maxWidth: 80,
   },
   digits: {
     fontFamily: 'monospace',
@@ -45,8 +43,11 @@ const ChartBody = ({
   rowsToDisplay,
 }) => {
   const marketCap = `coin.RAW.${currency}.MKTCAP`
-  // const marketCap = `coin.market_cap_${currency}`
   const price = `coin.RAW.${currency}.PRICE`
+  const change = `coin.RAW.${currency}.CHANGEPCT24HOUR`
+  const volume = `coin.RAW.${currency}.VOLUME24HOUR`
+  const supply = `coin.RAW.${currency}.SUPPLY`
+
   let data
   if (filteredChart.length || userInput.length) {
     data = filteredChart
@@ -84,10 +85,14 @@ const ChartBody = ({
                   Change (24h)
                 </TableCell>
                 <TableCell padding="checkbox" align="right">
-                  Change (7d)
+                  Volume <br />
+                  (24h)
                 </TableCell>
-                <TableCell padding="none" align="right">
+                <TableCell padding="checkbox" align="right">
                   Market Cap
+                </TableCell>
+                <TableCell padding="checkbox" align="right">
+                  Supply
                 </TableCell>
               </TableRow>
             </TableHead>
@@ -111,26 +116,16 @@ const ChartBody = ({
                     )}
                   </TableCell>
                   <TableCell padding="none" align="center">
-                    {/* {coin.rank} */}
                     <CoinSymbol symbol={coin.CoinInfo.Name} />
                   </TableCell>
-                  <TableCell
-                    padding="checkbox"
-                    component="th"
-                    scope="row"
-                    className={classes.cellOverflow}
-                  >
+                  <TableCell padding="checkbox" component="th" scope="row">
                     <Typography variant="body1">
-                      {/* <CoinSymbol symbol={coin.CoinInfo.Name} /> */}
                       {coin.CoinInfo.Name}
                     </Typography>
                     <Typography variant="caption" noWrap>
                       {coin.CoinInfo.FullName}
                     </Typography>
                   </TableCell>
-
-                  {/*  */}
-
                   <TableCell padding="checkbox" align="right">
                     <Typography noWrap className={classes.digits}>
                       {toCurrency(eval(price))}
@@ -140,29 +135,25 @@ const ChartBody = ({
                     <Typography
                       className={[
                         classes.digits,
-                        coin.RAW.USD.CHANGEPCT24HOUR > 0
-                          ? `${classes.up}`
-                          : `${classes.down}`,
+                        eval(change) > 0 ? `${classes.up}` : `${classes.down}`,
                       ].join(' ')}
                     >
-                      {`${coin.RAW.USD.CHANGEPCT24HOUR.toFixed(2)}%`}
+                      {`${eval(change).toFixed(2)}%`}
                     </Typography>
                   </TableCell>
                   <TableCell padding="checkbox" align="right">
-                    <Typography
-                      className={[
-                        classes.digits,
-                        coin.percent_change_7d > 0
-                          ? `${classes.up}`
-                          : `${classes.down}`,
-                      ].join(' ')}
-                    >
-                      {`${coin.percent_change_7d}%`}
+                    <Typography className={classes.digits}>
+                      {toCurrency(eval(volume))}
                     </Typography>
                   </TableCell>
-                  <TableCell padding="none" align="right">
+                  <TableCell padding="checkbox" align="right">
                     <Typography className={classes.digits}>
                       {toCurrency(eval(marketCap))}
+                    </Typography>
+                  </TableCell>
+                  <TableCell padding="checkbox" align="right">
+                    <Typography className={classes.digits}>
+                      {eval(supply).toLocaleString()}
                     </Typography>
                   </TableCell>
                 </TableRow>

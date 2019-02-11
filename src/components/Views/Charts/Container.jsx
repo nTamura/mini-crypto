@@ -5,7 +5,7 @@ import ChartBody from 'components/Common/ChartBody'
 import Loading from 'components/Common/Loading'
 import ShowMore from 'components/Common/ShowMore'
 
-const url = 'https://min-api.cryptocompare.com/data/top/mktcapfull?limit=10'
+const url = 'https://min-api.cryptocompare.com/data/top/mktcapfull?limit=100'
 // const url = 'https://api.coinmarketcap.com/v1/ticker/?convert=CAD&limit=100'
 const API_KEY = process.env.REACT_APP_CRYPTO_COMPARE_API_KEY
 class Container extends Component {
@@ -36,6 +36,7 @@ class Container extends Component {
   }
 
   getChart = api => {
+    // need to make 2 calls to get CAD, cannot have 2 tysm
     const { currency } = this.state
     axios
       .get(`${api}&tsym=${currency.toUpperCase()}`, {
