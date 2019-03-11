@@ -2,15 +2,11 @@
   "extends": [
     "eslint:recommended",
     "plugin:react/recommended",
-    # "plugin:prettier/recommended",
-    "airbnb",
+    "plugin:prettier/recommended",
+    "airbnb"
   ],
   "parser": "babel-eslint",
-  "plugins": [
-    "react",
-    "jsx-a11y",
-    "import"
-  ],
+  "plugins": ["react", "jsx-a11y", "import"],
   "parserOptions": {
     "ecmaVersion": 6,
     "sourceType": "module",
@@ -20,17 +16,17 @@
     }
   },
   "env": {
-      "es6": true,
-      "browser": true,
-      "node": true,
-      "mocha": true
+    "es6": true,
+    "browser": true,
+    "node": true,
+    "mocha": true
   },
   "globals": {
-      "describe": false,
-      "expect": false,
-      "test": false,
-      "document": false,
-      "event": false
+    "describe": false,
+    "expect": false,
+    "test": false,
+    "document": false,
+    "event": false
   },
   "rules": {
     "comma-dangle": "off",
@@ -40,25 +36,26 @@
     "function-paren-newline": ["error", "consistent"],
     "no-undef": "off",
     "no-unused-vars": "warn",
-    "max-len": [2, 80, 2, {
+    "max-len": [
+      2,
+      80,
+      2,
+      {
         "ignoreComments": true,
         "ignoreTrailingComments": true,
         "ignoreUrls": true,
         "ignoreStrings": true,
         "ignoreTemplateLiterals": true,
         "ignoreRegExpLiterals": true
-    }],
+      }
+    ],
     "react/forbid-prop-types": "off",
-    # "react/jsx-wrap-multilines": [2, {arrow: "parens"}],
-    "react/jsx-wrap-multilines": [2, {declaration: "parens-new-line"}],
+    "react/jsx-wrap-multilines": [2, { "declaration": "parens-new-line" }],
     "react/jsx-first-prop-new-line": [error, "multiline-multiprop"],
-    # "react/jsx-closing-tag-location": true,
     "react/jsx-filename-extension": "off",
     "jsx-a11y/anchor-is-valid": "off",
     "jsx-a11y/no-autofocus": "off",
     "import/extensions": 0,
-    # temp turned off, 'warning  Unexpected use of file extension "png"'
-    # "import/extensions": ["warn", {"js": "never", "json": "always"}],
     "import/prefer-default-export": "off",
     "import/no-extraneous-dependencies": "off",
     "import/no-unresolved": "off",
