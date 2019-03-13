@@ -51,24 +51,12 @@
       }
     ],
     "react/forbid-prop-types": "off",
-<<<<<<< HEAD
     "react/jsx-wrap-multilines": [2, { "declaration": "parens-new-line" }],
-    "react/jsx-first-prop-new-line": [error, "multiline-multiprop"],
-=======
-    "react/jsx-wrap-multilines": [2, { "arrow": "parens" }],
-    // "react/jsx-wrap-multilines": [2, { "declaration": "parens-new-line" }],
-    "react/jsx-first-prop-new-line": [error, "multiline-multiprop"],
-    //  "react/jsx-closing-tag-location": true,
->>>>>>> 5cee5328716adabb61091fc40dbfa2dd4d801df0
+    "react/jsx-first-prop-new-line": [2, "multiline-multiprop"],
     "react/jsx-filename-extension": "off",
     "jsx-a11y/anchor-is-valid": "off",
     "jsx-a11y/no-autofocus": "off",
     "import/extensions": 0,
-<<<<<<< HEAD
-=======
-    // temp turned off, 'warning  Unexpected use of file extension "png"'
-    // "import/extensions": ["warn", {"js": "never", "json": "always"}],
->>>>>>> 5cee5328716adabb61091fc40dbfa2dd4d801df0
     "import/prefer-default-export": "off",
     "import/no-extraneous-dependencies": "off",
     "import/no-unresolved": "off",

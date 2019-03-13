@@ -17,79 +17,9 @@ import {
 import GoBack from 'components/Common/GoBack'
 import logo from 'assets/icon.png'
 
-const styles = () => ({
-  root: {
-    padding: '16px 0',
-    backgroundColor: '#34353F',
-  },
-  menuBar: {
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-  },
-  titleContainer: {
-    display: 'flex',
-    flexDirection: 'column',
-    textAlign: 'center',
-  },
-  title: {
-    paddingLeft: 12,
-    textDecoration: 'none',
-  },
-  drawerTitleContainer: {
-    display: 'flex',
-    alignItems: 'center',
-  },
-  drawerTitle: {
-    textDecoration: 'none',
-    textAlign: 'center',
-    padding: 16,
-  },
-  navLink: {
-    textDecoration: 'none',
-    display: 'flex',
-    alignItems: 'center',
-    padding: 16,
-  },
-  navLinkMuted: {
-    color: 'rgba(255,255,255,0.4)',
-    textDecoration: 'none',
-    padding: 16,
-  },
-  flex: {
-    display: 'flex',
-    flexDirection: 'column',
-    height: '100%',
-    justifyContent: 'space-between',
-  },
-  logo: {
-    width: 60,
-    height: '100%',
-  },
-  iconNews: {
-    paddingRight: 14,
-    color: '#d42f10',
-  },
-  iconGlobal: {
-    paddingRight: 14,
-    color: '#82B177',
-  },
-  iconFav: {
-    paddingRight: 14,
-    color: '#EF932D',
-  },
-  iconPort: {
-    paddingRight: 14,
-    color: '#CFEBE7',
-  },
-})
-
 class Navbar extends Component {
-  constructor() {
-    super()
-    this.state = {
-      drawer: false,
-    }
+  state = {
+    drawer: false,
   }
 
   toggleDrawer = open => () => {
@@ -121,7 +51,6 @@ class Navbar extends Component {
           <div className={classes.titleContainer}>
             {this.matchPath(location.pathname)}
           </div>
-
           <IconButton
             className={classes.navHamburger}
             onClick={this.toggleDrawer(true)}
@@ -204,4 +133,72 @@ class Navbar extends Component {
     )
   }
 }
+
+const styles = () => ({
+  root: {
+    padding: '16px 0',
+    backgroundColor: '#34353F',
+  },
+  menuBar: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+  },
+  titleContainer: {
+    display: 'flex',
+    flexDirection: 'column',
+    textAlign: 'center',
+  },
+  title: {
+    paddingLeft: 12,
+    textDecoration: 'none',
+  },
+  drawerTitleContainer: {
+    display: 'flex',
+    alignItems: 'center',
+  },
+  drawerTitle: {
+    textDecoration: 'none',
+    textAlign: 'center',
+    padding: 16,
+  },
+  navLink: {
+    textDecoration: 'none',
+    display: 'flex',
+    alignItems: 'center',
+    padding: 16,
+  },
+  navLinkMuted: {
+    color: 'rgba(255,255,255,0.4)',
+    textDecoration: 'none',
+    padding: 16,
+  },
+  flex: {
+    display: 'flex',
+    flexDirection: 'column',
+    height: '100%',
+    justifyContent: 'space-between',
+  },
+  logo: {
+    width: 60,
+    height: '100%',
+  },
+  iconNews: {
+    paddingRight: 14,
+    color: '#d42f10',
+  },
+  iconGlobal: {
+    paddingRight: 14,
+    color: '#82B177',
+  },
+  iconFav: {
+    paddingRight: 14,
+    color: '#EF932D',
+  },
+  iconPort: {
+    paddingRight: 14,
+    color: '#CFEBE7',
+  },
+})
+
 export default withRouter(withStyles(styles)(Navbar))

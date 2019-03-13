@@ -6,7 +6,7 @@ import createBrowserHistory from 'history/createBrowserHistory'
 import { Router } from 'react-router-dom'
 import { MuiThemeProvider } from '@material-ui/core/styles'
 import CustomTheme from 'styles/Theme'
-import 'index.css'
+import 'styles/index.css'
 
 const browserHistory = createBrowserHistory()
 
