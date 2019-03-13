@@ -10,6 +10,26 @@ import Portfolio from 'components/Views/Portfolio'
 import Favorites from 'components/Views/Favorites'
 import NotFound from 'components/Views/NotFound'
 
+function App({ classes }) {
+  return (
+    <>
+      <Navbar />
+      <div id="App" className={classes.app}>
+        <div className={[classes.root, 'container'].join(' ')}>
+          <Switch>
+            <Route exact path="/" component={News} />
+            <Route exact path="/charts" component={Charts} />
+            <Route exact path="/favorites" component={Favorites} />
+            <Route exact path="/portfolio" component={Portfolio} />
+            <Route exact path="/about" component={About} />
+            <Route component={NotFound} />
+          </Switch>
+        </div>
+      </div>
+      <Footer />
+    </>
+  )
+}
 const styles = () => ({
   app: {
     flex: 1,
@@ -19,24 +39,5 @@ const styles = () => ({
     paddingBottom: 32,
   },
 })
-
-const App = ({ classes }) => (
-  <>
-    <Navbar />
-    <div id="App" className={classes.app}>
-      <div className={[classes.root, 'container'].join(' ')}>
-        <Switch>
-          <Route exact path="/" component={News} />
-          <Route exact path="/charts" component={Charts} />
-          <Route exact path="/favorites" component={Favorites} />
-          <Route exact path="/about" component={About} />
-          <Route exact path="/portfolio" component={Portfolio} />
-          <Route component={NotFound} />
-        </Switch>
-      </div>
-    </div>
-    <Footer />
-  </>
-)
 
 export default withStyles(styles)(App)

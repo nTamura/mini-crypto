@@ -10,47 +10,6 @@ import {
   CardContent,
 } from '@material-ui/core'
 
-const styles = () => ({
-  root: {
-    width: '100%',
-  },
-  titleContainer: {
-    display: 'flex',
-    alignItems: 'center',
-    padding: '14px 0',
-  },
-  title: {
-    lineHeight: '1.5rem',
-  },
-  flex: {
-    display: 'flex',
-    justifyContent: 'space-between',
-  },
-  icon: {
-    paddingRight: 14,
-    color: '#d42f10',
-  },
-  link: {
-    textDecoration: 'none',
-  },
-  linkIcon: {
-    paddingRight: 8,
-    color: '#CFEBE7',
-  },
-  previewImg: {
-    width: '100%',
-    maxHeight: 160,
-    padding: '16px 0',
-    objectFit: 'cover',
-  },
-  cardsList: {
-    paddingBottom: 0,
-  },
-  card: {
-    marginBottom: 24,
-  },
-})
-
 const NewsBody = ({ classes, newsData, rowsToDisplay }) => (
   <div className={classes.root}>
     <div className={classes.titleContainer}>
@@ -91,7 +50,6 @@ const NewsBody = ({ classes, newsData, rowsToDisplay }) => (
               }}
             />
           </CardContent>
-
           <CardActions>
             <Button
               component="a"
@@ -108,5 +66,46 @@ const NewsBody = ({ classes, newsData, rowsToDisplay }) => (
     </div>
   </div>
 )
+
+const styles = () => ({
+  root: {
+    width: '100%',
+  },
+  titleContainer: {
+    display: 'flex',
+    alignItems: 'center',
+    padding: '14px 0',
+  },
+  title: {
+    lineHeight: '1.5rem',
+  },
+  flex: {
+    display: 'flex',
+    justifyContent: 'space-between',
+  },
+  icon: {
+    paddingRight: 14,
+    color: '#d42f10',
+  },
+  link: {
+    textDecoration: 'none',
+  },
+  linkIcon: {
+    paddingRight: 8,
+    color: '#CFEBE7',
+  },
+  previewImg: {
+    width: '100%',
+    maxHeight: 160,
+    padding: '16px 0',
+    objectFit: 'cover',
+  },
+  cardsList: {
+    paddingBottom: 0,
+  },
+  card: {
+    marginBottom: 24,
+  },
+})
 
 export default withStyles(styles)(NewsBody)
