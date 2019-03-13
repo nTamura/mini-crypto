@@ -1,4 +1,5 @@
-html, body {
+html,
+body {
   height: 100%;
   min-height: 100%;
 }
@@ -23,3 +24,6 @@ body {
     width: 550px;
   }
 }
+/* i.cc {
+  background: url('https://image.flaticon.com/icons/svg/8/8235.svg');
+} */

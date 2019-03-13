@@ -1,5 +1,5 @@
 {
-  "name": "react-crypto",
+  "name": "mini-crypto",
   "version": "0.1.0",
   "private": true,
   "dependencies": {

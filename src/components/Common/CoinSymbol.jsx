@@ -5,18 +5,33 @@ import 'cryptocoins-icons/webfont/cryptocoins.css'
 import 'cryptocoins-icons/webfont/cryptocoins-colors.css'
 
 const styles = () => ({
-  icon: {
-    paddingRight: 8
+  small: {
+    fontSize: 25,
+  },
+  large: {
+    fontSize: 28,
+  },
+  cc: {
+    // backgroundImage: 'url(https://image.flaticon.com/icons/svg/8/8235.svg)',
   },
 })
 
-const CoinSymbol = ({ classes, symbol }) => (
-  <i className={[classes.icon, symbol, 'cc'].join(' ')} />
+const CoinSymbol = ({ classes, symbol, large }) => (
+  <i
+    className={[symbol, 'cc', `${large ? classes.large : classes.small}`].join(
+      ' '
+    )}
+  />
 )
 
 CoinSymbol.propTypes = {
   classes: PropTypes.object.isRequired,
   symbol: PropTypes.string.isRequired,
+  large: PropTypes.bool,
+}
+
+CoinSymbol.defaultProps = {
+  large: false,
 }
 
 export default withStyles(styles)(CoinSymbol)

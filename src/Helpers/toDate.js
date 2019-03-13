@@ -1,3 +1,3 @@
-const toDate = date => new Date(Date.parse(date)).toLocaleString()
+const toDate = date => new Date(date * 1000).toDateString()
 
 export default toDate

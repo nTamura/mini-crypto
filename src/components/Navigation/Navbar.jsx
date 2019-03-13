@@ -1,67 +1,86 @@
 import React, { Component } from 'react'
 import { withRouter, Link } from 'react-router-dom'
-import { SwipeableDrawer, Typography, IconButton, Divider } from '@material-ui/core'
 import { withStyles } from '@material-ui/core/styles'
-import { Menu as MenuIcon, Star, InsertChartOutlined, TrendingUp, Equalizer, Language } from '@material-ui/icons'
+import {
+  SwipeableDrawer,
+  Typography,
+  IconButton,
+  Divider,
+} from '@material-ui/core'
+import {
+  Menu as MenuIcon,
+  Star,
+  TrendingUp,
+  Equalizer,
+  Language,
+} from '@material-ui/icons'
 import GoBack from 'components/Common/GoBack'
+import logo from 'assets/icon.png'
 
 const styles = () => ({
   root: {
     padding: '16px 0',
-    backgroundColor: '#34353F'
+    backgroundColor: '#34353F',
   },
   menuBar: {
     display: 'flex',
     alignItems: 'center',
-    justifyContent: 'space-between'
+    justifyContent: 'space-between',
   },
   titleContainer: {
     display: 'flex',
     flexDirection: 'column',
-    textAlign: 'center'
+    textAlign: 'center',
   },
   title: {
     paddingLeft: 12,
-    textDecoration: 'none'
+    textDecoration: 'none',
+  },
+  drawerTitleContainer: {
+    display: 'flex',
+    alignItems: 'center',
   },
   drawerTitle: {
     textDecoration: 'none',
     textAlign: 'center',
-    padding: 16
+    padding: 16,
   },
   navLink: {
     textDecoration: 'none',
     display: 'flex',
     alignItems: 'center',
-    padding: 16
+    padding: 16,
   },
-  navLinkDisabled: {
-    color: 'rgba(255,255,255,0.2)',
-    display: 'flex',
-    alignItems: 'center',
-    padding: 16
+  navLinkMuted: {
+    color: 'rgba(255,255,255,0.4)',
+    textDecoration: 'none',
+    padding: 16,
   },
   flex: {
     display: 'flex',
     flexDirection: 'column',
     height: '100%',
-    justifyContent: 'space-between'
+    justifyContent: 'space-between',
+  },
+  logo: {
+    width: 60,
+    height: '100%',
   },
   iconNews: {
     paddingRight: 14,
-    color: '#d42f10'
+    color: '#d42f10',
   },
   iconGlobal: {
     paddingRight: 14,
-    color: '#82B177'
+    color: '#82B177',
   },
   iconFav: {
     paddingRight: 14,
-    color: '#EF932D'
+    color: '#EF932D',
   },
   iconPort: {
     paddingRight: 14,
-    color: '#CFEBE7'
+    color: '#CFEBE7',
   },
 })
 
@@ -69,7 +88,7 @@ class Navbar extends Component {
   constructor() {
     super()
     this.state = {
-      drawer: false
+      drawer: false,
     }
   }
 
@@ -80,15 +99,15 @@ class Navbar extends Component {
   matchPath = path => {
     switch (path) {
       case '/':
-        return 'Crypto Tracker'
+        return <img src={logo} style={{ width: 48 }} alt="logo" />
       case '/charts':
-        return 'Global Tracker'
+        return <Typography variant="h6">Global Tracker</Typography>
       case '/favorites':
-        return 'Personal Tracker'
+        return <Typography variant="h6">Personal Tracker</Typography>
       case '/portfolio':
-        return 'Your Portfolio'
+        return <Typography variant="h6">Portfolio</Typography>
       default:
-        return 'Crypto Tracker'
+        return <img src={logo} style={{ width: 48 }} alt="logo" />
     }
   }
 
@@ -100,25 +119,10 @@ class Navbar extends Component {
         <div className={[classes.menuBar, 'container'].join(' ')}>
           <GoBack />
           <div className={classes.titleContainer}>
-
-            <Typography
-              variant="h6"
-              className={classes.title}
-            >
-              {this.matchPath(location.pathname)}
-            </Typography>
-            <Typography
-              variant="caption"
-            >
-              {/*
-                once you select a coin, show coin name here
-              */}
-            </Typography>
+            {this.matchPath(location.pathname)}
           </div>
 
           <IconButton
-            // aria-haspopup="true"
-            // aria-owns={anchorEl ? 'hamburgerMenu' : null}
             className={classes.navHamburger}
             onClick={this.toggleDrawer(true)}
           >
@@ -139,12 +143,12 @@ class Navbar extends Component {
             className={classes.flex}
           >
             <div>
-              <Typography
-                variant="subtitle1"
-                className={classes.drawerTitle}
-              >
-                React-Crypto App
-              </Typography>
+              <div className={classes.drawerTitleContainer}>
+                <img src={logo} className={classes.logo} alt="logo" />
+                <Typography variant="subtitle1" className={classes.drawerTitle}>
+                  Mini-Crypto
+                </Typography>
+              </div>
 
               <Divider />
 
@@ -176,26 +180,24 @@ class Navbar extends Component {
                 Personal Tracker
               </Typography>
               <Typography
-                // component={Link}
-                // to="/portfolio"
+                component={Link}
+                to="/portfolio"
                 variant="subtitle1"
-                className={classes.navLinkDisabled}
+                className={classes.navLink}
               >
                 <Equalizer className={classes.iconPort} />
                 Portfolio
               </Typography>
-
             </div>
             <Typography
-              // component={Link}
-              // to="/about"
+              component={Link}
+              to="/about"
               variant="caption"
               align="right"
-              className={classes.navLinkDisabled}
+              className={classes.navLinkMuted}
             >
               About
             </Typography>
-
           </div>
         </SwipeableDrawer>
       </div>
