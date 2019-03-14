@@ -12,26 +12,8 @@ import {
 import { Star, StarBorder } from '@material-ui/icons'
 import CoinSymbol from 'components/Common/CoinSymbol'
 import toCurrency from 'Helpers/toCurrency'
+import toRound from 'Helpers/toRound'
 import maxChar from 'Helpers/maxChar'
-
-const styles = () => ({
-  root: {
-    width: '100%',
-    overflowX: 'auto',
-    marginBottom: 16,
-    paddingBottom: 16,
-  },
-  paper: {
-    width: '100%',
-    overflowX: 'auto',
-  },
-  digits: {
-    fontFamily: 'monospace',
-  },
-  up: { color: '#2cac48' },
-  down: { color: '#e72121' },
-  star: { color: '#f1e325' },
-})
 
 const ChartBody = ({
   currency,
@@ -157,7 +139,7 @@ const ChartBody = ({
                     </TableCell>
                     <TableCell padding="checkbox" align="right">
                       <Typography className={classes.digits}>
-                        {eval(supply).toLocaleString()}
+                        {toRound(eval(supply))}
                       </Typography>
                     </TableCell>
                   </TableRow>
@@ -170,4 +152,24 @@ const ChartBody = ({
     </div>
   )
 }
+
+const styles = () => ({
+  root: {
+    width: '100%',
+    overflowX: 'auto',
+    marginBottom: 16,
+    paddingBottom: 16,
+  },
+  paper: {
+    width: '100%',
+    overflowX: 'auto',
+  },
+  digits: {
+    fontFamily: 'monospace',
+  },
+  up: { color: '#2cac48' },
+  down: { color: '#e72121' },
+  star: { color: '#f1e325' },
+})
+
 export default withStyles(styles)(ChartBody)
