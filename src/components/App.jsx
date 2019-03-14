@@ -20,7 +20,7 @@ function App({ classes }) {
             <Route exact path="/" component={News} />
             <Route exact path="/charts" component={Charts} />
             <Route exact path="/favorites" component={Favorites} />
-            <Route exact path="/portfolio" component={Portfolio} />
+            {/* <Route exact path="/portfolio" component={Portfolio} /> */}
             <Route exact path="/about" component={About} />
             <Route component={NotFound} />
           </Switch>

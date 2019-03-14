@@ -40,7 +40,15 @@ const Toolbar = ({
           </div>
           <InputBase
             // onChange={handleSearch}
-            placeholder="Add source"
+            placeholder="Quantity"
+            classes={{
+              root: classes.inputRoot,
+              input: classes.inputInput,
+            }}
+          />
+          <InputBase
+            // onChange={handleSearch}
+            placeholder="Coin"
             classes={{
               root: classes.inputRoot,
               input: classes.inputInput,
