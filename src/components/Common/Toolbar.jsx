@@ -1,8 +1,8 @@
 import React from 'react'
 import { withRouter } from 'react-router-dom'
 import { withStyles } from '@material-ui/core/styles'
-import { AddCircleOutline, ArrowDropDown, Search } from '@material-ui/icons'
 import { Menu, MenuItem, InputBase, Typography } from '@material-ui/core'
+import { AddCircleOutline, ArrowDropDown, Search } from '@material-ui/icons'
 
 const options = ['USD', 'CAD']
 
@@ -95,10 +95,14 @@ const styles = () => ({
     alignItems: 'center',
     height: 53,
   },
+  inputRoot: {
+    width: '80%',
+  },
   searchIcon: {
+    display: 'flex',
     color: '#FFF',
-    padding: 12,
     fontSize: '1.4rem',
+    paddingRight: 16,
   },
 })
 

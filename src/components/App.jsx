@@ -33,7 +33,6 @@ function App({ classes }) {
 const styles = () => ({
   app: {
     flex: 1,
-    // boxSizing: 'border-box',
     background: 'linear-gradient(to right bottom, #484B5B, #34353F)',
   },
   root: {

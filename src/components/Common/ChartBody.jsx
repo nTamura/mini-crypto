@@ -61,7 +61,6 @@ const ChartBody = ({
                     Rank
                   </TableCell>
                   <TableCell padding="checkbox">Name</TableCell>
-
                   <TableCell padding="checkbox" align="right">
                     Price
                   </TableCell>

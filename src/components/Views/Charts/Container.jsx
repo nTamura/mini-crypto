@@ -4,7 +4,6 @@ import Toolbar from 'components/Common/Toolbar'
 import ChartBody from 'components/Common/ChartBody'
 import Loading from 'components/Common/Loading'
 import ShowMore from 'components/Common/ShowMore'
-// const url = 'https://api.coinmarketcap.com/v1/ticker/?convert=CAD&limit=100'
 
 const URL = 'https://min-api.cryptocompare.com/data/top/mktcapfull?limit=100'
 const API_KEY = process.env.REACT_APP_CRYPTO_COMPARE_API_KEY
@@ -14,21 +13,20 @@ function Container() {
   const storageFavorites = JSON.parse(localStorage.getItem('favorites'))
   const storageCurrency = JSON.parse(localStorage.getItem('currency'))
 
-  const [isLoading, setIsLoading] = useState(true)
   const [userInput, setUserInput] = useState('')
   const [chartData, setChartData] = useState([])
   const [anchorEl, setAnchorEl] = useState(null)
+  const [isLoading, setIsLoading] = useState(true)
   const [filteredChart, setFilteredChart] = useState([])
   const [rowsToDisplay, setRowsToDisplay] = useState(25)
-  const [favorites, setFavorites] = useState(storageFavorites || [])
   const [currency, setCurrency] = useState(storageCurrency || 'usd')
+  const [favorites, setFavorites] = useState(storageFavorites || [])
 
   useEffect(() => {
     getChart()
   }, [currency])
 
   const getChart = async () => {
-    // console.log(`${URL}&tsym=${currency.toUpperCase()}`)
     setIsLoading(true)
     let result = await axios.get(`${URL}&tsym=${currency}`, options)
     setChartData(result.data.Data)
