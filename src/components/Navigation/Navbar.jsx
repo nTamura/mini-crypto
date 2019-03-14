@@ -109,10 +109,10 @@ class Navbar extends Component {
                 Personal Tracker
               </Typography>
               <Typography
-                component={Link}
-                to="/portfolio"
+                // component={Link}
+                // to="/portfolio"
                 variant="subtitle1"
-                className={classes.navLink}
+                className={classes.navLinkMuted}
               >
                 <Equalizer className={classes.iconPort} />
                 Portfolio
