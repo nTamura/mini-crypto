@@ -43,8 +43,8 @@ function Container() {
     const query = e.target.value.toLowerCase()
     const results = Object.values(chartData).filter(
       result =>
-        result.name.toLowerCase().includes(query) ||
-        result.symbol.toLowerCase().includes(query)
+        result.CoinInfo.Name.toLowerCase().includes(query) ||
+        result.CoinInfo.FullName.toLowerCase().includes(query)
     )
     setFilteredChart(results)
   }

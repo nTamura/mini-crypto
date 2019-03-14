@@ -1,33 +1,10 @@
 import React from 'react'
-import { withRouter, Link } from 'react-router-dom'
-
+import { withRouter } from 'react-router-dom'
 import { withStyles } from '@material-ui/core/styles'
 import { AddCircleOutline, ArrowDropDown, Search } from '@material-ui/icons'
 import { Menu, MenuItem, InputBase, Typography } from '@material-ui/core'
 
 const options = ['USD', 'CAD']
-
-const styles = () => ({
-  root: {
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-  },
-  currencyDropdown: {
-    display: 'flex',
-    fontSize: '1rem',
-  },
-  searchBar: {
-    display: 'flex',
-    alignItems: 'center',
-    height: 53,
-  },
-  searchIcon: {
-    color: '#FFF',
-    padding: 12,
-    fontSize: '1.4rem',
-  },
-})
 
 const Toolbar = ({
   classes,
@@ -101,5 +78,28 @@ const Toolbar = ({
     </Menu>
   </div>
 )
+
+const styles = () => ({
+  root: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+  },
+  currencyDropdown: {
+    display: 'flex',
+    fontSize: '1rem',
+  },
+  searchBar: {
+    display: 'flex',
+    flex: 1,
+    alignItems: 'center',
+    height: 53,
+  },
+  searchIcon: {
+    color: '#FFF',
+    padding: 12,
+    fontSize: '1.4rem',
+  },
+})
 
 export default withRouter(withStyles(styles)(Toolbar))
