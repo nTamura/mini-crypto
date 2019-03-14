@@ -58,111 +58,115 @@ const ChartBody = ({
 
   return (
     <div className={classes.root}>
-      <Paper className={classes.root}>
-        {data.length < 1 ? (
-          <Table className={classes.table}>
-            <TableBody>
-              <TableRow>
-                <TableCell align="center">
-                  <Typography variant="caption">No results found</Typography>
-                </TableCell>
-              </TableRow>
-            </TableBody>
-          </Table>
-        ) : (
-          <Table className={classes.table}>
-            <TableHead>
-              <TableRow hover>
-                <TableCell padding="checkbox" />
-                <TableCell padding="none" align="center">
-                  Rank
-                </TableCell>
-                <TableCell padding="checkbox">Name</TableCell>
-
-                <TableCell padding="checkbox" align="right">
-                  Price
-                </TableCell>
-                <TableCell padding="checkbox" align="right">
-                  Change (24h)
-                </TableCell>
-                <TableCell padding="checkbox" align="right">
-                  Volume <br />
-                  (24h)
-                </TableCell>
-                <TableCell padding="checkbox" align="right">
-                  Market Cap
-                </TableCell>
-                <TableCell padding="checkbox" align="right">
-                  Supply
-                </TableCell>
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              {data.slice(0, rowsToDisplay).map(coin => (
-                <TableRow key={coin.CoinInfo.Id}>
-                  <TableCell padding="checkbox" align="right">
-                    {favoritedItem(coin.CoinInfo.Name) ? (
-                      <Star
-                        className={classes.star}
-                        onClick={() => {
-                          toggleFavorite(coin.CoinInfo.Name)
-                        }}
-                      />
-                    ) : (
-                      <StarBorder
-                        onClick={() => {
-                          toggleFavorite(coin.CoinInfo.Name)
-                        }}
-                      />
-                    )}
-                  </TableCell>
-                  <TableCell padding="none" align="center">
-                    <CoinSymbol symbol={coin.CoinInfo.Name} />
-                  </TableCell>
-                  <TableCell style={{ padding: '0px 0px 0px 12px' }}>
-                    <Typography variant="body1">
-                      {coin.CoinInfo.Name}
-                    </Typography>
-                    <Typography variant="caption" noWrap>
-                      {maxChar(coin.CoinInfo.FullName)}
-                    </Typography>
-                  </TableCell>
-                  <TableCell padding="checkbox" align="right">
-                    <Typography className={classes.digits}>
-                      {toCurrency(eval(price))}
-                    </Typography>
-                  </TableCell>
-                  <TableCell padding="checkbox" align="right">
-                    <Typography
-                      className={[
-                        classes.digits,
-                        eval(change) > 0 ? `${classes.up}` : `${classes.down}`,
-                      ].join(' ')}
-                    >
-                      {`${eval(change).toFixed(2)}%`}
-                    </Typography>
-                  </TableCell>
-                  <TableCell padding="checkbox" align="right">
-                    <Typography className={classes.digits}>
-                      {toCurrency(eval(volume))}
-                    </Typography>
-                  </TableCell>
-                  <TableCell padding="checkbox" align="right">
-                    <Typography className={classes.digits}>
-                      {toCurrency(eval(marketCap))}
-                    </Typography>
-                  </TableCell>
-                  <TableCell padding="checkbox" align="right">
-                    <Typography className={classes.digits}>
-                      {eval(supply).toLocaleString()}
-                    </Typography>
+      {chartData && (
+        <Paper className={classes.root}>
+          {data.length < 1 ? (
+            <Table className={classes.table}>
+              <TableBody>
+                <TableRow>
+                  <TableCell align="center">
+                    <Typography variant="caption">No results found</Typography>
                   </TableCell>
                 </TableRow>
-              ))}
-            </TableBody>
-          </Table>
-        )}
-      </Paper>
+              </TableBody>
+            </Table>
+          ) : (
+            <Table className={classes.table}>
+              <TableHead>
+                <TableRow hover>
+                  <TableCell padding="checkbox" />
+                  <TableCell padding="none" align="center">
+                    Rank
+                  </TableCell>
+                  <TableCell padding="checkbox">Name</TableCell>
+
+                  <TableCell padding="checkbox" align="right">
+                    Price
+                  </TableCell>
+                  <TableCell padding="checkbox" align="right">
+                    Change (24h)
+                  </TableCell>
+                  <TableCell padding="checkbox" align="right">
+                    Volume <br />
+                    (24h)
+                  </TableCell>
+                  <TableCell padding="checkbox" align="right">
+                    Market Cap
+                  </TableCell>
+                  <TableCell padding="checkbox" align="right">
+                    Supply
+                  </TableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                {data.slice(0, rowsToDisplay).map(coin => (
+                  <TableRow key={coin.CoinInfo.Id}>
+                    <TableCell padding="checkbox" align="right">
+                      {favoritedItem(coin.CoinInfo.Name) ? (
+                        <Star
+                          className={classes.star}
+                          onClick={() => {
+                            toggleFavorite(coin.CoinInfo.Name)
+                          }}
+                        />
+                      ) : (
+                        <StarBorder
+                          onClick={() => {
+                            toggleFavorite(coin.CoinInfo.Name)
+                          }}
+                        />
+                      )}
+                    </TableCell>
+                    <TableCell padding="none" align="center">
+                      <CoinSymbol symbol={coin.CoinInfo.Name} />
+                    </TableCell>
+                    <TableCell style={{ padding: '0px 0px 0px 12px' }}>
+                      <Typography variant="body1">
+                        {coin.CoinInfo.Name}
+                      </Typography>
+                      <Typography variant="caption" noWrap>
+                        {maxChar(coin.CoinInfo.FullName)}
+                      </Typography>
+                    </TableCell>
+                    <TableCell padding="checkbox" align="right">
+                      <Typography className={classes.digits}>
+                        {toCurrency(eval(price))}
+                      </Typography>
+                    </TableCell>
+                    <TableCell padding="checkbox" align="right">
+                      <Typography
+                        className={[
+                          classes.digits,
+                          eval(change) > 0
+                            ? `${classes.up}`
+                            : `${classes.down}`,
+                        ].join(' ')}
+                      >
+                        {`${eval(change).toFixed(2)}%`}
+                      </Typography>
+                    </TableCell>
+                    <TableCell padding="checkbox" align="right">
+                      <Typography className={classes.digits}>
+                        {toCurrency(eval(volume))}
+                      </Typography>
+                    </TableCell>
+                    <TableCell padding="checkbox" align="right">
+                      <Typography className={classes.digits}>
+                        {toCurrency(eval(marketCap))}
+                      </Typography>
+                    </TableCell>
+                    <TableCell padding="checkbox" align="right">
+                      <Typography className={classes.digits}>
+                        {eval(supply).toLocaleString()}
+                      </Typography>
+                    </TableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
+          )}
+        </Paper>
+      )}
     </div>
   )
 }

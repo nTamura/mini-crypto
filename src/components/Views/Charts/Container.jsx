@@ -1,165 +1,110 @@
-import React, { Component } from 'react'
+import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import Toolbar from 'components/Common/Toolbar'
 import ChartBody from 'components/Common/ChartBody'
 import Loading from 'components/Common/Loading'
 import ShowMore from 'components/Common/ShowMore'
-
-const url = 'https://min-api.cryptocompare.com/data/top/mktcapfull?limit=100'
 // const url = 'https://api.coinmarketcap.com/v1/ticker/?convert=CAD&limit=100'
+
+const URL = 'https://min-api.cryptocompare.com/data/top/mktcapfull?limit=100'
 const API_KEY = process.env.REACT_APP_CRYPTO_COMPARE_API_KEY
-class Container extends Component {
-  constructor(props) {
-    super(props)
+const options = { authorization: API_KEY }
 
-    const storageFavorites = JSON.parse(localStorage.getItem('favorites'))
-    const storageCurrency = JSON.parse(localStorage.getItem('currency'))
+function Container() {
+  const storageFavorites = JSON.parse(localStorage.getItem('favorites'))
+  const storageCurrency = JSON.parse(localStorage.getItem('currency'))
 
-    this.state = {
-      isLoading: true,
-      userInput: '',
-      chartData: [],
-      filteredChart: [],
-      rowsToDisplay: 25,
-      favorites: storageFavorites || [],
-      anchorEl: null,
-      currency: storageCurrency || 'USD',
-    }
+  const [isLoading, setIsLoading] = useState(true)
+  const [userInput, setUserInput] = useState('')
+  const [chartData, setChartData] = useState([])
+  const [anchorEl, setAnchorEl] = useState(null)
+  const [filteredChart, setFilteredChart] = useState([])
+  const [rowsToDisplay, setRowsToDisplay] = useState(25)
+  const [favorites, setFavorites] = useState(storageFavorites || [])
+  const [currency, setCurrency] = useState(storageCurrency || 'usd')
+
+  useEffect(() => {
+    getChart()
+  }, [currency])
+
+  const getChart = async () => {
+    // console.log(`${URL}&tsym=${currency.toUpperCase()}`)
+    setIsLoading(true)
+    let result = await axios.get(`${URL}&tsym=${currency}`, options)
+    setChartData(result.data.Data)
+    setIsLoading(false)
   }
 
-  componentDidMount() {
-    this.getChart(url)
-    setInterval(() => {
-      this.getChart(url)
-    }, 180000)
-    // TODO: add last updated at __
-  }
+  const handleClick = e => setAnchorEl(e.currentTarget)
 
-  getChart = api => {
-    // need to make 2 calls to get CAD, cannot have 2 tysm
-    const { currency } = this.state
-    axios
-      .get(`${api}&tsym=${currency.toUpperCase()}`, {
-        authorization: API_KEY,
-      })
-      .then(res => {
-        this.setState({ chartData: res.data.Data }, () => {
-          console.log(this.state.chartData[0])
-          console.log(this.state.chartData[2])
-          this.setState({ isLoading: false })
-        })
-      })
-  }
-  handleClick = e => {
-    this.setState({ anchorEl: e.currentTarget })
-  }
+  const handleClose = () => setAnchorEl(null)
 
-  handleClose = () => {
-    this.setState({ anchorEl: null })
-  }
-
-  handleSearch = e => {
-    const { chartData } = this.state
-    const keyword = e.target.value.toLowerCase()
-
-    const filteredChart = Object.values(chartData).filter(
+  const handleSearch = e => {
+    const query = e.target.value.toLowerCase()
+    const results = Object.values(chartData).filter(
       result =>
-        result.name.toLowerCase().includes(keyword) ||
-        result.symbol.toLowerCase().includes(keyword)
+        result.name.toLowerCase().includes(query) ||
+        result.symbol.toLowerCase().includes(query)
     )
-    this.setState({
-      filteredChart,
-      userInput: keyword,
-    })
+    setFilteredChart(results)
   }
 
-  showMore = () => {
-    let { rowsToDisplay: rows } = this.state
-    this.setState({
-      rowsToDisplay: (rows += 25),
-    })
+  const showMore = () =>
+    setRowsToDisplay(rowsToDisplay => (rowsToDisplay += 25))
+
+  const selectCurrency = async e => {
+    setIsLoading(true)
+    const value = e.target.getAttribute('value')
+    localStorage.setItem('currency', JSON.stringify(value))
+    setCurrency(value)
+    handleClose()
   }
 
-  selectCurrency = e => {
-    const currency = e.target.getAttribute('value')
-    this.setState({ currency }, () => {
-      localStorage.setItem('currency', JSON.stringify(currency).toUpperCase())
-      this.handleClose()
-    })
-  }
+  const favoritedItem = item => favorites.includes(item)
 
-  favoritedItem = item => {
-    const { favorites } = this.state
-    return favorites.includes(item)
-  }
-
-  toggleFavorite = item => {
-    const { favorites } = this.state
+  const toggleFavorite = item => {
     if (favorites.includes(item)) {
       const value = favorites.filter(i => i !== item)
-      this.setState({ favorites: value }, () => {
-        localStorage.setItem('favorites', JSON.stringify([...value]))
-      })
+      setFavorites(value)
+      localStorage.setItem('favorites', JSON.stringify([...value]))
     } else {
       const value = favorites.concat(item)
-      this.setState({ favorites: value }, () => {
-        localStorage.setItem('favorites', JSON.stringify([...value]))
-      })
+      setFavorites(value)
+      localStorage.setItem('favorites', JSON.stringify([...value]))
     }
   }
-
-  render() {
-    const {
-      isLoading,
-      chartData,
-      filteredChart,
-      anchorEl,
-      currency,
-      userInput,
-      rowsToDisplay,
-    } = this.state
-
-    return (
-      <>
-        <Toolbar
-          handleClick={e => {
-            this.handleClick(e)
-          }}
-          handleClose={e => {
-            this.handleClose(e)
-          }}
-          selectCurrency={e => {
-            this.selectCurrency(e)
-          }}
-          handleSearch={e => {
-            this.handleSearch(e)
-          }}
-          anchorEl={anchorEl}
-          currency={currency}
-        />
-        {isLoading ? (
-          <Loading />
-        ) : (
-          <>
-            <ChartBody
-              chartData={chartData}
-              filteredChart={filteredChart}
-              userInput={userInput}
-              currency={currency}
-              rowsToDisplay={rowsToDisplay}
-              favoritedItem={this.favoritedItem}
-              toggleFavorite={this.toggleFavorite}
-            />
-            <ShowMore
-              showMore={this.showMore}
-              rowsToDisplay={rowsToDisplay}
-              maxRows={chartData.length}
-            />
-          </>
-        )}
-      </>
-    )
-  }
+  return (
+    <>
+      <Toolbar
+        handleClick={e => handleClick(e)}
+        handleClose={e => handleClose(e)}
+        handleSearch={e => handleSearch(e)}
+        selectCurrency={e => selectCurrency(e)}
+        anchorEl={anchorEl}
+        currency={currency}
+      />
+      {isLoading ? (
+        <Loading />
+      ) : (
+        <>
+          <ChartBody
+            chartData={chartData}
+            userInput={userInput}
+            currency={currency}
+            filteredChart={filteredChart}
+            rowsToDisplay={rowsToDisplay}
+            favoritedItem={favoritedItem}
+            toggleFavorite={toggleFavorite}
+          />
+          <ShowMore
+            showMore={showMore}
+            rowsToDisplay={rowsToDisplay}
+            maxRows={chartData.length}
+          />
+        </>
+      )}
+    </>
+  )
 }
 
 export default Container
