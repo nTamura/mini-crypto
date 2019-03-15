@@ -8,6 +8,7 @@
     "axios": "^0.18.0",
     "create-react-app": "^2.1.8",
     "cryptocoins-icons": "^2.9.0",
+    "firebase": "^5.9.0",
     "local-storage": "^1.4.2",
     "react": "^16.8.4",
     "react-dom": "^16.8.4",
@@ -25,6 +26,7 @@
   "scripts": {
     "start": "NODE_PATH=src/ react-scripts start",
     "build": "NODE_PATH=src/ react-scripts build",
+    "deploy": "NODE_PATH=src/ react-scripts build && firebase deploy",
     "test": "NODE_PATH=src/ react-scripts test --env=jsdom",
     "eject": "NODE_PATH=src/ react-scripts eject"
   },
