@@ -5,7 +5,8 @@ import WealthChart from 'components/Views/Portfolio/WealthChart'
 import Loading from 'components/Common/Loading'
 import Toolbar from 'components/Common/Toolbar'
 
-const API_KEY = process.env.REACT_APP_CRYPTO_COMPARE_API_KEY
+const API_KEY = process.env.CRYPTOCOMPARE_KEY
+// const API_KEY = process.env.REACT_APP_CRYPTO_COMPARE_API_KEY
 const options = { authorization: API_KEY }
 const url = 'https://min-api.cryptocompare.com/data/pricemultifull?'
 

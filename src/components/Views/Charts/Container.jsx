@@ -6,7 +6,9 @@ import Loading from 'components/Common/Loading'
 import ShowMore from 'components/Common/ShowMore'
 
 const URL = 'https://min-api.cryptocompare.com/data/top/mktcapfull?limit=100'
-const API_KEY = process.env.REACT_APP_CRYPTO_COMPARE_API_KEY
+// const API_KEY = process.env.REACT_APP_CRYPTO_COMPARE_API_KEY
+const API_KEY = process.env.CRYPTOCOMPARE_KEY
+
 const options = { authorization: API_KEY }
 
 function Container() {
