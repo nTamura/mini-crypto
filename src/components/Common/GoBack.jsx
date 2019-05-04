@@ -5,18 +5,19 @@ import { withRouter } from 'react-router-dom'
 import { KeyboardArrowLeft } from '@material-ui/icons'
 import { IconButton } from '@material-ui/core'
 
+function GoBack({ classes, history }) {
+  return (
+    <IconButton onClick={history.goBack}>
+      <KeyboardArrowLeft className={classes.icon} />
+    </IconButton>
+  )
+}
+
 const styles = () => ({
   icon: {
-    color: '#FFF'
-  }
+    color: '#FFF',
+  },
 })
-
-
-const GoBack = ({ classes, history }) => (
-  <IconButton onClick={history.goBack}>
-    <KeyboardArrowLeft className={classes.icon} />
-  </IconButton>
-)
 
 GoBack.propTypes = {
   classes: PropTypes.object.isRequired,
